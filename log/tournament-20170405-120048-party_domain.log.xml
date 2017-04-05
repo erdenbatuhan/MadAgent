@@ -1,0 +1,145 @@
+<?xml version="1.0" ?><Tournament>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:48 EET 2017" timeOfAgreement="0.4585635359116022" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="165" runtime="0.093828347" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="-" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@36" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.975" discountedUtility="0.975" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@37" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.49464690002105177" discountedUtility="0.49464690002105177" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@38" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.6123211348649507" discountedUtility="0.6123211348649507" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.1270718232044199" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="44" runtime="0.022416248" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="ConcederNegotiationParty@39" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@39" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@40" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@41" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.1878453038674033" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="66" runtime="0.034660538" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="Group6@42" deadline="180rounds">
+<resultsOfAgent agent="Group6@42" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@43" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@44" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.1712707182320442" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="61" runtime="0.031600171" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="BoulwareNegotiationParty@45" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@45" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@46" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.2969260373579895" discountedUtility="0.2969260373579895" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@47" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5968500104495003" discountedUtility="0.5968500104495003" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.27071823204419887" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="96" runtime="0.047211606" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="ConcederNegotiationParty@48" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@48" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@49" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@50" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.3314917127071823" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="119" runtime="0.054698734" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="Group6@51" deadline="180rounds">
+<resultsOfAgent agent="Group6@51" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@52" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@53" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.4585635359116022" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="165" runtime="0.08127058" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="BoulwareNegotiationParty@54" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@54" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.975" discountedUtility="0.975" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@55" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.49464690002105177" discountedUtility="0.49464690002105177" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@56" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.6123211348649507" discountedUtility="0.6123211348649507" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.1270718232044199" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="44" runtime="0.023307665" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="ConcederNegotiationParty@57" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@57" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@58" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@59" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:49 EET 2017" timeOfAgreement="0.1878453038674033" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="66" runtime="0.035891174" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="Group6@60" deadline="180rounds">
+<resultsOfAgent agent="Group6@60" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@61" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@62" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.1712707182320442" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="61" runtime="0.032647798" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="BoulwareNegotiationParty@63" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@63" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@64" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.2969260373579895" discountedUtility="0.2969260373579895" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@65" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5968500104495003" discountedUtility="0.5968500104495003" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.27071823204419887" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="96" runtime="0.046564906" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="ConcederNegotiationParty@66" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@66" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@67" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@68" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.3314917127071823" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="119" runtime="0.052046697" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="Group6@69" deadline="180rounds">
+<resultsOfAgent agent="Group6@69" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@70" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@71" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.4585635359116022" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="165" runtime="0.099714239" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Printed, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="BoulwareNegotiationParty@72" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@72" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.975" discountedUtility="0.975" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@73" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.49464690002105177" discountedUtility="0.49464690002105177" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@74" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.6123211348649507" discountedUtility="0.6123211348649507" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.1270718232044199" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="44" runtime="0.020761766" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="ConcederNegotiationParty@75" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@75" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@76" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@77" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.1878453038674033" lastAction="(Accept  bid:Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ])" domain="etc/templates/partydomain/party_domain.xml" bids="66" runtime="0.034457431" finalOutcome="Bid[Food: Catering, Drinks: Handmade Cocktails, Location: Party Room, Invitations: Custom, Printed, Music: MP3, Cleanup: Water and Soap, ]" startingAgent="Group6@78" deadline="180rounds">
+<resultsOfAgent agent="Group6@78" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.6583333333333333" discountedUtility="0.6583333333333333" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@79" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@80" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5856226065195247" discountedUtility="0.5856226065195247" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.1712707182320442" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ])" domain="etc/templates/partydomain/party_domain.xml" bids="61" runtime="0.03144784" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Party Room, Invitations: Custom, Handmade, Music: DJ, Cleanup: Specialized Materials, ]" startingAgent="BoulwareNegotiationParty@81" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@81" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="1.0" discountedUtility="1.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@82" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.2969260373579895" discountedUtility="0.2969260373579895" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@83" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.5968500104495003" discountedUtility="0.5968500104495003" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.27071823204419887" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="96" runtime="0.046489445" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="ConcederNegotiationParty@84" deadline="180rounds">
+<resultsOfAgent agent="ConcederNegotiationParty@84" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@85" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="Group6" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@86" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome>
+<NegotiationOutcome currentTime="Wed Apr 05 12:00:50 EET 2017" timeOfAgreement="0.3314917127071823" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ])" domain="etc/templates/partydomain/party_domain.xml" bids="119" runtime="0.06461046" finalOutcome="Bid[Food: Chips and Nuts, Drinks: Non-Alcoholic, Location: Party Tent, Invitations: Plain, Music: Band, Cleanup: Hired Help, ]" startingAgent="Group6@87" deadline="180rounds">
+<resultsOfAgent agent="Group6@87" agentDesc="accept Nth offer" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="Group6" finalUtility="0.48749999999999993" discountedUtility="0.48749999999999993" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@88" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.43241457513409964" discountedUtility="0.43241457513409964" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="BoulwareNegotiationParty@89" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.9999999999999999" discountedUtility="0.9999999999999999" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome></Tournament>

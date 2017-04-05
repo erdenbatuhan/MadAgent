@@ -1,0 +1,20 @@
+sep=;
+Run time (s);Round;Exception;deadline;Agreement;Discounted;#agreeing;min.util.;max.util.;Dist. to Pareto;Dist. to Nash;Social Welfare;Agent 1;Agent 2;Agent 3;Utility 1;Utility 2;Utility 3;Disc. Util. 1;Disc. Util. 2;Disc. Util. 3;Profile 1;Profile 2;Profile 3
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
+;;failed to construct agent:java.util.concurrent.ExecutionException: Execution failed of createpartylist:java.lang.IllegalStateException: need standard persistent data;;;;;;;;;;;;;;;;;;;;;
