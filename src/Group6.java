@@ -24,6 +24,7 @@ import negotiator.utility.AbstractUtilitySpace;
 public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
+    private double threshold = 0.8;
     private int nrChosenActions = 0; // number of times chosenAction was called.
     private StandardInfoList history;
     boolean control = true;
@@ -59,7 +60,6 @@ public class Group6 extends AbstractNegotiationParty {
             }
 
             System.out.println(maxutils); // notice tournament suppresses all output.
-            System.out.flush();
         }
     }
 
@@ -75,8 +75,9 @@ public class Group6 extends AbstractNegotiationParty {
         if (nrChosenActions > history.size() & lastReceivedBid != null) {
             return new Accept(getPartyId(), lastReceivedBid);
         } else {
-			/* offer ve bid farklı classlar, Bid vector , Offer bu bidi içeren vector */
-			/* getPartyID() returns bizim partynin ID */
+			/* offer and bid are different classes
+			 * Bid is a vector , and Offer is the vector that contains bid vector */
+			/* getPartyID() returns our Party's ID */
             return new Offer(getPartyId(), generateRandomBid());
         }
     }
@@ -85,14 +86,13 @@ public class Group6 extends AbstractNegotiationParty {
     public void receiveMessage(AgentID sender, Action action) {
         super.receiveMessage(sender, action);
 
-		/* Because action can be accep or offer */
-		/* OpponentModel için bir class yazsak güzel olur */
-		/* opponent model burada kullanılabilir */
+		/* Because action can be accept or offer */
+		/* New class for OpponentModeling can be good */
+		/* opponent model can be used here */
         if (action instanceof Offer) {
             lastReceivedBid = ((Offer) action).getBid();
         }
 
-        // history bos degilse
         if(!history.isEmpty() && control){
             analyzeHistory();
         }
