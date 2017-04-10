@@ -1,6 +1,6 @@
 # CS462 (Agent Project) 
 
-- Term project for CS 462 (Decision making in multiagent systems)
+- Term project for CS 462, Decision Making in Multiagent Systems
 - Group Members
   - Ekrem Çetinkaya
   - Batuhan Erden
