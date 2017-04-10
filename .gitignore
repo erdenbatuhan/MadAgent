@@ -1,14 +1,4 @@
-# Eclipse
-/bin/
-.classpath
-.project
-.settings/
-
-# IntelliJ
-/out/
-.idea/
-*.iml
-*.iws
-
-# Mac
 .DS_Store
+/bin/
+/out/
+
