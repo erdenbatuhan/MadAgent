@@ -22,7 +22,10 @@ import negotiator.utility.EvaluatorDiscrete;
 public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
-    private double threshold = 0.9;
+    private double numberOfRounds = 0;
+    private double roundsToGetAlmostMad = 30;
+    private double roundsToGetMad = 60;
+    private double threshold = 0.80;
     private StandardInfoList history;
     private boolean control = true;
 
@@ -62,6 +65,7 @@ public class Group6 extends AbstractNegotiationParty {
 
     @Override
     public Action chooseAction(List<Class<? extends Action>> validActions) { // Your agent's turn
+        numberOfRounds++;
         if(!history.isEmpty() && control){
             analyzeHistory();
         }
@@ -79,6 +83,9 @@ public class Group6 extends AbstractNegotiationParty {
             /* else generate a new offer */
             else{
                 Offer newOffer = new Offer(getPartyId(), generateBid());
+                System.out.println("Round : " + numberOfRounds);
+                System.out.println("Offer : " + newOffer);
+                System.out.println("Utility : " + utilitySpace.getUtility(newOffer.getBid()));
 
                 return new Offer(getPartyId(), newOffer.getBid());
             }
@@ -87,12 +94,27 @@ public class Group6 extends AbstractNegotiationParty {
 
     private Bid generateBid (){
         Bid bestBid = null;
+        Bid startingBids = null;
         HashMap<Integer, Value> values = new HashMap<Integer, Value>();
         List<Issue> issues = utilitySpace.getDomain().getIssues();
 
         try{
             /* TODO For starting rounds, just generate reasanoble offers than stick with the best one */
             bestBid = utilitySpace.getMaxUtilityBid();
+            double tempThreshold = 0.7;
+            if(numberOfRounds < roundsToGetMad){
+                if(numberOfRounds < roundsToGetAlmostMad){
+                    tempThreshold = 0.5;
+                }
+                int trial = 0;
+                while (true){
+                    trial++;
+                    startingBids = generateRandomBid();
+                    if(utilitySpace.getUtility(startingBids) > tempThreshold || trial > 200) break;
+                }
+
+                bestBid = startingBids;
+            }
 
         }
         catch (Exception e){
