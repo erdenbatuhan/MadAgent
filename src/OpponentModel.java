@@ -20,5 +20,9 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class OpponentModel {
 	private ArrayList<Offer> lastBids;
+	private Offer recievedOffer;
 
+	public void init(Offer recievedOffer){
+		this.recievedOffer = recievedOffer;
+	}
 }

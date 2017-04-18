@@ -17,17 +17,12 @@ import negotiator.persistent.StandardInfoList;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
 
-/**
- * Sample party that accepts the Nth offer, where N is the number of sessions
- * this [agent-profile] already did.
- */
 public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
     private double threshold = 0.8;
-    private int nrChosenActions = 0; // number of times chosenAction was called.
     private StandardInfoList history;
-    boolean control = true;
+    private boolean control = true;
 
     @Override
 	/* This will be called before the negotiation starts */
@@ -45,11 +40,11 @@ public class Group6 extends AbstractNegotiationParty {
         }
 
 		/* Use history to get previous negotiation utilities */
-        history = (StandardInfoList) getData().get();
+		history = (StandardInfoList) getData().get();
 
         if (!history.isEmpty()) {
             // example of using the history.
-			/* Compute for each party the maximum utility of the bids in last session. */
+			/* Compute for each party the maximum utility of the bids in last session.  */
             Map<String, Double> maxutils = new HashMap<String, Double>();
             StandardInfo lastinfo = history.get(history.size() - 1); /* Most recent history */
 
@@ -65,20 +60,31 @@ public class Group6 extends AbstractNegotiationParty {
 
     @Override
     public Action chooseAction(List<Class<? extends Action>> validActions) { // Your agent's turn
-        nrChosenActions++;
-              
         if(!history.isEmpty() && control){
             analyzeHistory();
         }
-        
-		/* if lastRecievedBid is null -> You are starter party */
-        if (nrChosenActions > history.size() & lastReceivedBid != null) {
-            return new Accept(getPartyId(), lastReceivedBid);
-        } else {
-			/* offer and bid are different classes
-			 * Bid is a vector , and Offer is the vector that contains bid vector */
-			/* getPartyID() returns our Party's ID */
+
+		/* if lastRecievedBid is null -> You are starter party, just generate a random offer */
+        if (lastReceivedBid == null) {
             return new Offer(getPartyId(), generateRandomBid());
+        }
+        /* Generate an offer */
+        else {
+            /* If utility of the last recieved bid is higher than our threshold Accept */
+            if(utilitySpace.getUtility(lastReceivedBid) > threshold){
+                return new Accept(getPartyId(), lastReceivedBid);
+            }
+            /* else generate a new offer with a higher utility than our threshold */
+            else{
+                Offer newOffer;
+                int trial = 0;
+                while(true){
+                    trial++;
+                    newOffer = new Offer(getPartyId(), generateRandomBid());
+                    if(utilitySpace.getUtility(newOffer.getBid()) >= threshold || trial>200) break;
+                }
+                return new Offer(getPartyId(), newOffer.getBid());
+            }
         }
     }
 
