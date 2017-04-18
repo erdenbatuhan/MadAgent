@@ -9,6 +9,7 @@ import negotiator.Deadline;
 import negotiator.actions.Accept;
 import negotiator.actions.Action;
 import negotiator.actions.Offer;
+import negotiator.issue.*;
 import negotiator.parties.AbstractNegotiationParty;
 import negotiator.persistent.PersistentDataContainer;
 import negotiator.persistent.PersistentDataType;
@@ -16,11 +17,12 @@ import negotiator.persistent.StandardInfo;
 import negotiator.persistent.StandardInfoList;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
+import negotiator.utility.EvaluatorDiscrete;
 
 public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
-    private double threshold = 0.8;
+    private double threshold = 0.9;
     private StandardInfoList history;
     private boolean control = true;
 
@@ -74,18 +76,30 @@ public class Group6 extends AbstractNegotiationParty {
             if(utilitySpace.getUtility(lastReceivedBid) > threshold){
                 return new Accept(getPartyId(), lastReceivedBid);
             }
-            /* else generate a new offer with a higher utility than our threshold */
+            /* else generate a new offer */
             else{
-                Offer newOffer;
-                int trial = 0;
-                while(true){
-                    trial++;
-                    newOffer = new Offer(getPartyId(), generateRandomBid());
-                    if(utilitySpace.getUtility(newOffer.getBid()) >= threshold || trial>200) break;
-                }
+                Offer newOffer = new Offer(getPartyId(), generateBid());
+
                 return new Offer(getPartyId(), newOffer.getBid());
             }
         }
+    }
+
+    private Bid generateBid (){
+        Bid bestBid = null;
+        HashMap<Integer, Value> values = new HashMap<Integer, Value>();
+        List<Issue> issues = utilitySpace.getDomain().getIssues();
+
+        try{
+            /* TODO For starting rounds, just generate reasanoble offers than stick with the best one */
+            bestBid = utilitySpace.getMaxUtilityBid();
+
+        }
+        catch (Exception e){
+            System.out.println("EXCEPTION");
+        }
+
+        return bestBid;
     }
 
     @Override
