@@ -23,8 +23,8 @@ public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
     private double numberOfRounds = 0;
-    private double roundsToGetAlmostMad = 30;
-    private double roundsToGetMad = 60;
+    private double roundsToGetAlmostMad = 0;
+    private double roundsToGetMad = 0;
     private double threshold = 0.80;
     private StandardInfoList history;
     private boolean control = true;
@@ -37,6 +37,8 @@ public class Group6 extends AbstractNegotiationParty {
 
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
 
+        roundsToGetMad = dl.getValue() - dl.getValue() / 10;
+        roundsToGetAlmostMad = (int) roundsToGetMad / 2;
         System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
         System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
 
@@ -83,9 +85,6 @@ public class Group6 extends AbstractNegotiationParty {
             /* else generate a new offer */
             else{
                 Offer newOffer = new Offer(getPartyId(), generateBid());
-                System.out.println("Round : " + numberOfRounds);
-                System.out.println("Offer : " + newOffer);
-                System.out.println("Utility : " + utilitySpace.getUtility(newOffer.getBid()));
 
                 return new Offer(getPartyId(), newOffer.getBid());
             }
@@ -95,12 +94,12 @@ public class Group6 extends AbstractNegotiationParty {
     private Bid generateBid (){
         Bid bestBid = null;
         Bid startingBids = null;
-        HashMap<Integer, Value> values = new HashMap<Integer, Value>();
-        List<Issue> issues = utilitySpace.getDomain().getIssues();
 
         try{
-            /* TODO For starting rounds, just generate reasanoble offers than stick with the best one */
             bestBid = utilitySpace.getMaxUtilityBid();
+            //TODO Implement opponent modeling to estimate Threshold Utility
+            //TODO Decide TempThreshold, make it relative to real Threshold
+            //TODO Make this work with Time Limited negotiations either
             double tempThreshold = 0.7;
             if(numberOfRounds < roundsToGetMad){
                 if(numberOfRounds < roundsToGetAlmostMad){
