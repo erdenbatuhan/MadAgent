@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import list.Tuple;
 import negotiator.AgentID;
@@ -17,15 +18,16 @@ import negotiator.persistent.StandardInfo;
 import negotiator.persistent.StandardInfoList;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
-import negotiator.utility.EvaluatorDiscrete;
 
 public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
+    private Bid bestReceivedBid = null;
     private double numberOfRounds = 0;
     private double roundsToGetAlmostMad = 0;
     private double roundsToGetMad = 0;
-    private double threshold = 0.80;
+    private double roundLimit = 0;
+    private double threshold = 0.8;
     private StandardInfoList history;
     private boolean control = true;
 
@@ -34,10 +36,16 @@ public class Group6 extends AbstractNegotiationParty {
 	/* initialize variables here */
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
-
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
+        try{
+            bestReceivedBid = utilSpace.getMinUtilityBid();
+        }
+        catch(Exception e){
+            System.out.println("Exception at init");
+        }
 
-        roundsToGetMad = dl.getValue() - dl.getValue() / 10;
+        roundLimit = dl.getValue();
+        roundsToGetMad = roundLimit - roundLimit / 10;
         roundsToGetAlmostMad = (int) roundsToGetMad / 2;
         System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
         System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
@@ -74,7 +82,11 @@ public class Group6 extends AbstractNegotiationParty {
 
         if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate a random offer
             return new Offer(getPartyId(), generateRandomBid());
-        } else { // Else, Generate an offer
+        }
+        else { // Else, Generate an offer
+            if(utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
+                bestReceivedBid = lastReceivedBid;
+
             if (utilitySpace.getUtility(lastReceivedBid) > threshold) { // If utility of the last received bid is higher than our threshold Accept
                 return new Accept(getPartyId(), lastReceivedBid);
             } else { // Else, generate a new offer */
@@ -109,6 +121,14 @@ public class Group6 extends AbstractNegotiationParty {
                 bestBid = startingBids;
             }
 
+            /* Offer your best bid in every 5 rounds */
+            if(numberOfRounds % 5 == 0)
+                bestBid = utilitySpace.getMaxUtilityBid();
+
+            /* If deadline is approaching offer the best recieved offer */
+            if(roundLimit - numberOfRounds < 2)
+                bestBid = bestReceivedBid;
+
         } catch (Exception e) {
             System.out.println("An exception thrown :(");
         }
@@ -137,7 +157,7 @@ public class Group6 extends AbstractNegotiationParty {
         return "accept Nth offer";
     }
 
-    public void analyzeHistory() {
+    private void analyzeHistory() {
     	control = false;
         // from recent to older history records
         for (int h = history.size() - 1, counter = 0; h >= 0; h--) {

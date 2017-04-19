@@ -24,5 +24,6 @@ public class OpponentModel {
 
 	public void init(Offer recievedOffer){
 		this.recievedOffer = recievedOffer;
+
 	}
 }
