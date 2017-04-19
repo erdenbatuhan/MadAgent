@@ -68,24 +68,18 @@ public class Group6 extends AbstractNegotiationParty {
     @Override
     public Action chooseAction(List<Class<? extends Action>> validActions) { // Your agent's turn
         numberOfRounds++;
-        if(!history.isEmpty() && control){
+        
+        if (!history.isEmpty() && control) {
             analyzeHistory();
         }
 
-		/* if lastRecievedBid is null -> You are starter party, just generate a random offer */
-        if (lastReceivedBid == null) {
+        if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate a random offer
             return new Offer(getPartyId(), generateRandomBid());
-        }
-        /* Generate an offer */
-        else {
-            /* If utility of the last recieved bid is higher than our threshold Accept */
-            if(utilitySpace.getUtility(lastReceivedBid) > threshold){
+        } else { // Else, Generate an offer
+            if (utilitySpace.getUtility(lastReceivedBid) > threshold) { // If utility of the last received bid is higher than our threshold Accept
                 return new Accept(getPartyId(), lastReceivedBid);
-            }
-            /* else generate a new offer */
-            else{
+            } else { // Else, generate a new offer */
                 Offer newOffer = new Offer(getPartyId(), generateBid());
-
                 return new Offer(getPartyId(), newOffer.getBid());
             }
         }
@@ -95,29 +89,29 @@ public class Group6 extends AbstractNegotiationParty {
         Bid bestBid = null;
         Bid startingBids = null;
 
-        try{
+        try {
             bestBid = utilitySpace.getMaxUtilityBid();
             //TODO Implement opponent modeling to estimate Threshold Utility
             //TODO Decide TempThreshold, make it relative to real Threshold
             //TODO Make this work with Time Limited negotiations either
             double tempThreshold = 0.7;
-            if(numberOfRounds < roundsToGetMad){
-                if(numberOfRounds < roundsToGetAlmostMad){
+            
+            if (numberOfRounds < roundsToGetMad) {
+                if (numberOfRounds < roundsToGetAlmostMad)
                     tempThreshold = 0.5;
-                }
-                int trial = 0;
-                while (true){
-                    trial++;
+                
+                for (int trial = 0; true; ++trial) {
                     startingBids = generateRandomBid();
-                    if(utilitySpace.getUtility(startingBids) > tempThreshold || trial > 200) break;
+                    
+                    if (utilitySpace.getUtility(startingBids) > tempThreshold || trial > 200)
+                    	break;
                 }
 
                 bestBid = startingBids;
             }
 
-        }
-        catch (Exception e){
-            System.out.println("EXCEPTION");
+        } catch (Exception e) {
+            System.out.println("An exception thrown :(");
         }
 
         return bestBid;
@@ -134,7 +128,7 @@ public class Group6 extends AbstractNegotiationParty {
             lastReceivedBid = ((Offer) action).getBid();
         }
 
-        if(!history.isEmpty() && control){
+        if (!history.isEmpty() && control) {
             analyzeHistory();
         }
     }
@@ -146,21 +140,18 @@ public class Group6 extends AbstractNegotiationParty {
 
     public void analyzeHistory() {
     	control = false;
-        //from recent to older history records
-        for(int h = history.size() - 1; h >= 0; h--){
+        // from recent to older history records
+        for (int h = history.size() - 1, counter = 0; h >= 0; h--) {
         	System.out.println("History index:  " + h);
-        	
-            StandardInfo lastInfo = history.get(h); // Most recent negotitaion history
-            int counter = 0;
+            StandardInfo lastInfo = history.get(h); // Most recent negotiation history
 
-            for(Tuple < String, Double> offered : lastInfo.getUtilities()){
-                counter++;
+            for (Tuple <String, Double> offered : lastInfo.getUtilities()) {
                 String party = offered.get1(); // get Party Id
                 Double util = offered.get2(); // get the offer utility
 
                 System.out.println("PartyID: " + party + " utility : " + util);
 
-                if(counter == 3)
+                if (++counter == 3)
                     break;
             }
         }
