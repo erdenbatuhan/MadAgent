@@ -1,21 +1,9 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
+import java.util.*;
 import list.Tuple;
-import negotiator.AgentID;
-import negotiator.Bid;
-import negotiator.Deadline;
-import negotiator.actions.Accept;
-import negotiator.actions.Action;
-import negotiator.actions.Offer;
-import negotiator.issue.*;
+import negotiator.*;
+import negotiator.actions.*;
 import negotiator.parties.AbstractNegotiationParty;
-import negotiator.persistent.PersistentDataContainer;
-import negotiator.persistent.PersistentDataType;
-import negotiator.persistent.StandardInfo;
-import negotiator.persistent.StandardInfoList;
+import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
 
@@ -28,8 +16,8 @@ public class Group6 extends AbstractNegotiationParty {
     private double roundsToGetMad = 0;
     private double roundLimit = 0;
     private double threshold = 0.8;
-    private StandardInfoList history;
     private boolean control = true;
+    private StandardInfoList history;
 
     @Override
 	/* This will be called before the negotiation starts */
@@ -37,22 +25,22 @@ public class Group6 extends AbstractNegotiationParty {
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-        try{
+        
+        try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
-        }
-        catch(Exception e){
+        } catch(Exception e) {
             System.out.println("Exception at init");
         }
 
         roundLimit = dl.getValue();
         roundsToGetMad = roundLimit - roundLimit / 10;
         roundsToGetAlmostMad = (int) roundsToGetMad / 2;
+        
         System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
         System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
 
-        if (getData().getPersistentDataType() != PersistentDataType.STANDARD) {
+        if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
             throw new IllegalStateException("need standard persistent data");
-        }
 
 		/* Use history to get previous negotiation utilities */
 		history = (StandardInfoList) getData().get();
@@ -122,11 +110,11 @@ public class Group6 extends AbstractNegotiationParty {
             }
 
             /* Offer your best bid in every 5 rounds */
-            if(numberOfRounds % 5 == 0)
+            if (numberOfRounds % 5 == 0)
                 bestBid = utilitySpace.getMaxUtilityBid();
 
             /* If deadline is approaching offer the best recieved offer */
-            if(roundLimit - numberOfRounds < 2)
+            if (roundLimit - numberOfRounds < 2)
                 bestBid = bestReceivedBid;
 
         } catch (Exception e) {
