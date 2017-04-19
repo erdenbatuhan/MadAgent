@@ -19,17 +19,17 @@ public class Group6 extends AbstractNegotiationParty {
     private boolean control = true;
     private StandardInfoList history;
 
-    @Override
 	/* This will be called before the negotiation starts */
 	/* initialize variables here */
+    @Override
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
         
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
-        } catch(Exception e) {
-            System.out.println("Exception at init");
+        } catch (Exception e) {
+            System.out.println("An exception thrown at init..");
         }
 
         roundLimit = dl.getValue();
@@ -40,7 +40,7 @@ public class Group6 extends AbstractNegotiationParty {
         System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
 
         if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
-            throw new IllegalStateException("need standard persistent data");
+        	throw new IllegalStateException("need standard persistent data");
 
 		/* Use history to get previous negotiation utilities */
 		history = (StandardInfoList) getData().get();
@@ -53,11 +53,17 @@ public class Group6 extends AbstractNegotiationParty {
             for (Tuple<String, Double> offered : lastinfo.getUtilities()) {
                 String party = offered.get1();
                 Double util = offered.get2();
+                
                 maxutils.put(party, maxutils.containsKey(party) ? Math.max(maxutils.get(party), util) : util);
             }
 
             System.out.println(maxutils); // Notice tournament suppresses all output.
         }
+    }
+
+    @Override
+    public String getDescription() {
+        return "accept Nth offer";
     }
 
     @Override
@@ -72,7 +78,7 @@ public class Group6 extends AbstractNegotiationParty {
             return new Offer(getPartyId(), generateRandomBid());
         }
         else { // Else, Generate an offer
-            if(utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
+            if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
 
             if (utilitySpace.getUtility(lastReceivedBid) > threshold) { // If utility of the last received bid is higher than our threshold Accept
@@ -84,9 +90,42 @@ public class Group6 extends AbstractNegotiationParty {
         }
     }
 
-    private Bid generateBid (){
-        Bid bestBid = null;
-        Bid startingBids = null;
+    @Override
+    public void receiveMessage(AgentID sender, Action action) {
+        super.receiveMessage(sender, action);
+
+		/* Because action can be accept or offer */
+		/* New class for OpponentModeling can be good */
+		/* opponent model can be used here */
+        if (action instanceof Offer)
+            lastReceivedBid = ((Offer) action).getBid();
+
+        if (!history.isEmpty() && control)
+            analyzeHistory();
+    }
+
+    private void analyzeHistory() {
+    	control = false;
+        // from recent to older history records
+        for (int h = history.size() - 1, counter = 0; h >= 0; h--) {
+        	System.out.println("History index:  " + h);
+            StandardInfo lastInfo = history.get(h); // Most recent negotiation history
+
+            for (Tuple <String, Double> offered : lastInfo.getUtilities()) {
+                String party = offered.get1(); // get Party Id
+                Double util = offered.get2(); // get the offer utility
+
+                System.out.println("PartyID: " + party + " utility : " + util);
+
+                if (++counter == 3)
+                    break;
+            }
+        }
+    }
+    
+    private Bid generateBid() {
+    	Bid bestBid = null;
+    	Bid startingBids = null;
 
         try {
             bestBid = utilitySpace.getMaxUtilityBid();
@@ -113,7 +152,7 @@ public class Group6 extends AbstractNegotiationParty {
             if (numberOfRounds % 5 == 0)
                 bestBid = utilitySpace.getMaxUtilityBid();
 
-            /* If deadline is approaching offer the best recieved offer */
+            /* If deadline is approaching offer the best received offer */
             if (roundLimit - numberOfRounds < 2)
                 bestBid = bestReceivedBid;
 
@@ -124,43 +163,4 @@ public class Group6 extends AbstractNegotiationParty {
         return bestBid;
     }
 
-    @Override
-    public void receiveMessage(AgentID sender, Action action) {
-        super.receiveMessage(sender, action);
-
-		/* Because action can be accept or offer */
-		/* New class for OpponentModeling can be good */
-		/* opponent model can be used here */
-        if (action instanceof Offer) {
-            lastReceivedBid = ((Offer) action).getBid();
-        }
-
-        if (!history.isEmpty() && control) {
-            analyzeHistory();
-        }
-    }
-
-    @Override
-    public String getDescription() {
-        return "accept Nth offer";
-    }
-
-    private void analyzeHistory() {
-    	control = false;
-        // from recent to older history records
-        for (int h = history.size() - 1, counter = 0; h >= 0; h--) {
-        	System.out.println("History index:  " + h);
-            StandardInfo lastInfo = history.get(h); // Most recent negotiation history
-
-            for (Tuple <String, Double> offered : lastInfo.getUtilities()) {
-                String party = offered.get1(); // get Party Id
-                Double util = offered.get2(); // get the offer utility
-
-                System.out.println("PartyID: " + party + " utility : " + util);
-
-                if (++counter == 3)
-                    break;
-            }
-        }
-    }
 }
