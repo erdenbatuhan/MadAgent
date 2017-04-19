@@ -90,9 +90,9 @@ public class Group6 extends AbstractNegotiationParty {
 
         try {
             bestBid = utilitySpace.getMaxUtilityBid();
-            //TODO Implement opponent modeling to estimate Threshold Utility
-            //TODO Decide TempThreshold, make it relative to real Threshold
-            //TODO Make this work with Time Limited negotiations either
+            // TODO Implement opponent modeling to estimate Threshold Utility
+            // TODO Decide TempThreshold, make it relative to real Threshold
+            // TODO Make this work with Time Limited negotiations either
             double tempThreshold = 0.7;
             
             if (numberOfRounds < roundsToGetMad) {
