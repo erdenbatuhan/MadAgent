@@ -315,7 +315,7 @@
             <partyRepItem classPath="negotiator.parties.FeedbackHillClimber">
                 <properties/>
             </partyRepItem>
-            <partyRepItem classPath="/Users/batuhan/Documents/Eclipse Workspace/CS462_AgentProject/bin/Group6.class">
+            <partyRepItem classPath="./bin/Group6.class">
                 <properties/>
             </partyRepItem>
         </partyRepItems>
