@@ -1,0 +1,9 @@
+<?xml version="1.0" ?><Session>
+<NegotiationOutcome currentTime="Thu Apr 20 22:19:47 EET 2017" lastAction="(Offer  bid:Bid[Pie: a74, ])" domain="etc/templates/pie/pie_domain.xml" bids="5" runtime="3.491370336" finalOutcome="-" startingAgent="-" deadline="180rounds">
+<resultsOfAgent agent="BoulwareNegotiationParty@0" agentDesc="Deadline-based boulware agent" utilspace="etc/templates/pie/pie_A.xml" agentClass="negotiator.parties.BoulwareNegotiationParty" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="ConcederNegotiationParty@1" agentDesc="Deadline-based conceder agent" utilspace="etc/templates/pie/pie_B.xml" agentClass="negotiator.parties.ConcederNegotiationParty" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="CounterOfferHumanNegotiationParty@2" agentDesc="Simple UI party" utilspace="etc/templates/ItexvsCypressDomain/ItexvsCypress_CypressAReserve00.xml" agentClass="negotiator.parties.CounterOfferHumanNegotiationParty" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome></Session>

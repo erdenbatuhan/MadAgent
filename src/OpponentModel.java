@@ -1,27 +1,35 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import list.Tuple;
-import negotiator.AgentID;
-import negotiator.Bid;
-import negotiator.Deadline;
-import negotiator.actions.Accept;
-import negotiator.actions.Action;
-import negotiator.actions.Offer;
+import negotiator.*;
+import negotiator.actions.*;
+import negotiator.issue.*;
 import negotiator.parties.AbstractNegotiationParty;
-import negotiator.persistent.PersistentDataContainer;
-import negotiator.persistent.PersistentDataType;
-import negotiator.persistent.StandardInfo;
-import negotiator.persistent.StandardInfoList;
+import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
 
 public class OpponentModel {
-	private ArrayList<Offer> lastBids;
-	private Offer recievedOffer;
 
+	HashMap<Issue, Value> preferences = new HashMap<Issue, Value>();
+	Offer recievedOffer = null;
+
+	public OpponentModel() {
+		
+	}
+	
+	public void addPreference(Bid lastReceivedBid) {
+		int numberOfIssues = lastReceivedBid.getIssues().size();
+		
+		for (int i = 0; i < numberOfIssues; i++) {
+			Issue issue = lastReceivedBid.getIssues().get(i);
+			Value value = lastReceivedBid.getValue(i + 1);
+			
+			preferences.put(issue, value);
+		}
+		
+		System.out.println(preferences.size());
+	}
+	
 	public void init(Offer recievedOffer){
 		this.recievedOffer = recievedOffer;
 

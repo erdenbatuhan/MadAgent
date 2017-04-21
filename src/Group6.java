@@ -107,7 +107,7 @@ public class Group6 extends AbstractNegotiationParty {
     private void analyzeHistory() {
     	control = false;
         // from recent to older history records
-        for (int h = history.size() - 1, counter = 0; h >= 0; h--) {
+        for (int h = history.size() - 1, counter = 0; h >= 0; h--, counter = 0) {
         	System.out.println("History index:  " + h);
             StandardInfo lastInfo = history.get(h); // Most recent negotiation history
 

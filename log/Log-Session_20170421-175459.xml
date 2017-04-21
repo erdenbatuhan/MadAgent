@@ -1,0 +1,9 @@
+<?xml version="1.0" ?><Session>
+<NegotiationOutcome currentTime="Fri Apr 21 17:55:17 EET 2017" lastAction="(EndNegotiation)" domain="etc/templates/partydomain/party_domain.xml" bids="3" runtime="18.379572522" finalOutcome="-" startingAgent="-" deadline="180rounds">
+<resultsOfAgent agent="CounterOfferHumanNegotiationParty@15" agentDesc="Simple UI party" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="negotiator.parties.CounterOfferHumanNegotiationParty" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="PhoenixParty@16" agentDesc="ANAC2015-1-Phoenix" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="agents.anac.y2015.Phoenix.PhoenixParty" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+<resultsOfAgent agent="Group6@17" agentDesc="Group 6's Agent" utilspace="etc/templates/partydomain/party4_utility.xml" agentClass="Group6" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
+</resultsOfAgent>
+</NegotiationOutcome></Session>
