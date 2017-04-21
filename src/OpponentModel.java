@@ -12,6 +12,7 @@ public class OpponentModel {
 
 	HashMap<Issue, Value> preferences = new HashMap<Issue, Value>();
 	Offer recievedOffer = null;
+	int round = 0;
 
 	public OpponentModel() {
 		
@@ -27,7 +28,7 @@ public class OpponentModel {
 			preferences.put(issue, value);
 		}
 		
-		System.out.println(preferences.size());
+		System.out.println(round + ") " + preferences.size());
 	}
 	
 	public void init(Offer recievedOffer){
