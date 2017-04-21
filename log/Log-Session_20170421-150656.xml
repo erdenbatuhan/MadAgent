@@ -1,9 +1,0 @@
-<?xml version="1.0" ?><Session>
-<NegotiationOutcome currentTime="Fri Apr 21 15:07:05 EET 2017" lastAction="(Accept  bid:Bid[Food: Chips and Nuts, Drinks: Beer Only, Location: Ballroom, Invitations: Plain, Music: DJ, Cleanup: Special Equiment, ])" domain="etc/templates/partydomain/party_domain.xml" bids="410" runtime="8.481188915" finalOutcome="-" startingAgent="-" deadline="180rounds">
-<resultsOfAgent agent="ParsAgent@0" agentDesc="ANAC2015-3-ParsAgent" utilspace="etc/templates/partydomain/party1_utility.xml" agentClass="agents.anac.y2015.ParsAgent.ParsAgent" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
-</resultsOfAgent>
-<resultsOfAgent agent="BayesianAgent@1" agentDesc="Agent BayesianAgent" utilspace="etc/templates/partydomain/party2_utility.xml" agentClass="agents.BayesianAgent" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
-</resultsOfAgent>
-<resultsOfAgent agent="Group6@2" agentDesc="Group 6's Agent" utilspace="etc/templates/partydomain/party3_utility.xml" agentClass="Group6" finalUtility="0.0" discountedUtility="0.0" discount="1.0">
-</resultsOfAgent>
-</NegotiationOutcome></Session>
