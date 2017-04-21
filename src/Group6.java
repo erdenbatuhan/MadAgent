@@ -156,6 +156,7 @@ public class Group6 extends AbstractNegotiationParty {
 
                 System.out.println("STATUS : " + currentStatus);
                 System.out.println("THRESHOLD :" + tempThreshold);
+                
                 bestBid = initialBid;
             }
 
@@ -167,13 +168,13 @@ public class Group6 extends AbstractNegotiationParty {
                 bestBid = utilitySpace.getMaxUtilityBid();
 
 
-        }
-        catch (Exception e) {
-            System.out.println("An exception thrown while generating bid");
+        } catch (Exception e) {
+            System.out.println("An exception thrown while generating a bid..");
         }
 
         System.out.println("Bid : " + bestBid);
         System.out.println("Utility : " + utilitySpace.getUtility(bestBid));
+        
         return bestBid;
     }
 
