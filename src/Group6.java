@@ -10,18 +10,18 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class Group6 extends AbstractNegotiationParty {
 
-	private OpponentModel opponentModel = null;
+	private Opponent opponentModel = null;
     private Bid lastReceivedBid = null;
     private Bid bestReceivedBid = null;
-    private SortedOutcomeSpace sos;
-    private String deadLineType;
+    private SortedOutcomeSpace sortedOutcomeSpace = null;
+    private String deadLineType = null;
     private double numberOfRounds = 0;
     private double timeToGetAlmostMad = 0;
     private double timeToGetMad = 0;
     private double negotiationLimit = 0;
     private double threshold = 0.8;
     private boolean control = true;
-    private StandardInfoList history;
+    private StandardInfoList history = null;;
 
     /* This will be called before the negotiation starts */
     /* initialize variables here */
@@ -29,7 +29,6 @@ public class Group6 extends AbstractNegotiationParty {
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-        opponentModel = new OpponentModel();
         
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
@@ -37,7 +36,7 @@ public class Group6 extends AbstractNegotiationParty {
             System.out.println("An exception thrown at init..");
         }
 
-        sos = new SortedOutcomeSpace(utilitySpace);
+        sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
         deadLineType = dl.getType().toString();
         negotiationLimit = dl.getValue();
         timeToGetMad = negotiationLimit * 4 / 5; // 80%
@@ -104,10 +103,8 @@ public class Group6 extends AbstractNegotiationParty {
         /* Because action can be accept or offer */
         /* New class for OpponentModeling can be good */
         /* opponent model can be used here */
-        if (action instanceof Offer) {
+        if (action instanceof Offer)
             lastReceivedBid = ((Offer) action).getBid();
-            opponentModel.addPreference(lastReceivedBid);
-        }
 
         if (!history.isEmpty() && control)
             analyzeHistory();
@@ -149,8 +146,6 @@ public class Group6 extends AbstractNegotiationParty {
             if (currentStatus < timeToGetMad) {
                 if (currentStatus < timeToGetAlmostMad)
                     tempThreshold = threshold * 4 / 5;
-                
-                System.out.println(currentStatus + "-" + tempThreshold);
 
                 for (int trial = 0; true; ++trial) {
                     initialBid = generateRandomBid();
@@ -177,8 +172,7 @@ public class Group6 extends AbstractNegotiationParty {
     
     @Override
     public HashMap<String, String> negotiationEnded(Bid acceptedBid) {
-    	opponentModel.printPreferences();
-    	
+    	System.out.println("Negotiation has ended..");
 		return null;
     }
 }
