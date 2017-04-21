@@ -63,7 +63,7 @@ public class Group6 extends AbstractNegotiationParty {
 
     @Override
     public String getDescription() {
-        return "accept Nth offer";
+        return "Group 6's Agent";
     }
 
     @Override
