@@ -10,6 +10,7 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class Group6 extends AbstractNegotiationParty {
 
+	private OpponentModel opponentModel = null;
     private Bid lastReceivedBid = null;
     private Bid bestReceivedBid = null;
     private SortedOutcomeSpace sos;
@@ -28,7 +29,8 @@ public class Group6 extends AbstractNegotiationParty {
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-
+        opponentModel = new OpponentModel();
+        
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
         } catch (Exception e) {
@@ -38,7 +40,7 @@ public class Group6 extends AbstractNegotiationParty {
         sos = new SortedOutcomeSpace(utilitySpace);
         deadLineType = dl.getType().toString();
         negotiationLimit = dl.getValue();
-        timeToGetMad = (negotiationLimit / 10) * 8; // 80%
+        timeToGetMad = negotiationLimit * 4 / 5; // 80%
         timeToGetAlmostMad = negotiationLimit / 2; // 50%
 
         System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
@@ -81,13 +83,12 @@ public class Group6 extends AbstractNegotiationParty {
 
         if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate an offer
             return new Offer(getPartyId(), generateBid());
-        }
-        else { // Else, Generate an offer
+        } else { // Else, Generate an offer
             if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
 
             if (utilitySpace.getUtility(lastReceivedBid) > threshold) {
-                // If utility of the last received bid is higher than our threshold Accept
+                // If utility of the last received bid is higher than our threshold, Accept
                 return new Accept(getPartyId(), lastReceivedBid);
             } else { // Else, generate a new offer */
                 Offer newOffer = new Offer(getPartyId(), generateBid());
@@ -103,8 +104,10 @@ public class Group6 extends AbstractNegotiationParty {
         /* Because action can be accept or offer */
         /* New class for OpponentModeling can be good */
         /* opponent model can be used here */
-        if (action instanceof Offer)
+        if (action instanceof Offer) {
             lastReceivedBid = ((Offer) action).getBid();
+            opponentModel.addPreference(lastReceivedBid);
+        }
 
         if (!history.isEmpty() && control)
             analyzeHistory();
@@ -137,15 +140,17 @@ public class Group6 extends AbstractNegotiationParty {
             bestBid = utilitySpace.getMaxUtilityBid();
             // TODO Implement opponent modeling to estimate Threshold Utility
             // TODO Decide TempThreshold, make it relative to real Threshold
-            double tempThreshold = 0.7;
+            double tempThreshold = threshold * 9 / 10;
             double currentStatus = numberOfRounds;
 
             if(deadLineType.equals("TIME"))
                 currentStatus = timeline.getTime() * timeline.getTotalTime(); // If negotiation is Time limited
 
-            if(currentStatus < timeToGetMad){
-                if(currentStatus < timeToGetAlmostMad)
-                    tempThreshold = 0.6;
+            if (currentStatus < timeToGetMad) {
+                if (currentStatus < timeToGetAlmostMad)
+                    tempThreshold = threshold * 4 / 5;
+                
+                System.out.println(currentStatus + "-" + tempThreshold);
 
                 for (int trial = 0; true; ++trial) {
                     initialBid = generateRandomBid();
@@ -157,20 +162,23 @@ public class Group6 extends AbstractNegotiationParty {
                 bestBid = initialBid;
             }
 
-            /* If deadline is approaching offer the best received offer (last 5% of limit) */
-            if(currentStatus > (negotiationLimit / 100) * 95)
+            /* If deadline is approaching, offer the best received offer (last 5% of limit) */
+            if (currentStatus > (negotiationLimit / 100) * 95)
                 bestBid = bestReceivedBid;
             /* Offer your best bid in every 10 rounds */
             if (numberOfRounds % 10 == 0)
                 bestBid = utilitySpace.getMaxUtilityBid();
-
-
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("An exception thrown while generating bid");
         }
 
         return bestBid;
     }
-
+    
+    @Override
+    public HashMap<String, String> negotiationEnded(Bid acceptedBid) {
+    	opponentModel.printPreferences();
+    	
+		return null;
+    }
 }

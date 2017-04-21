@@ -10,7 +10,7 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class OpponentModel {
 
-	HashMap<Issue, Value> preferences = new HashMap<Issue, Value>();
+	Bid bestBid = null;
 	Offer recievedOffer = null;
 	int round = 0;
 
@@ -19,20 +19,17 @@ public class OpponentModel {
 	}
 	
 	public void addPreference(Bid lastReceivedBid) {
-		int numberOfIssues = lastReceivedBid.getIssues().size();
 		
-		for (int i = 0; i < numberOfIssues; i++) {
-			Issue issue = lastReceivedBid.getIssues().get(i);
-			Value value = lastReceivedBid.getValue(i + 1);
-			
-			preferences.put(issue, value);
-		}
-		
-		System.out.println(round + ") " + preferences.size());
+//		int numberOfIssues = lastReceivedBid.getIssues().size();
+//		
+//		for (int i = 0; i < numberOfIssues; i++) {
+//			Issue issue = lastReceivedBid.getIssues().get(i);
+//			Value value = lastReceivedBid.getValue(i + 1);
+//			
+//		}
 	}
 	
-	public void init(Offer recievedOffer){
-		this.recievedOffer = recievedOffer;
-
+	public void printPreferences() {
+		
 	}
 }
