@@ -14,6 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/CS462_AgentProject$Java.coverage" NAME="Java Coverage Results" MODIFIED="1492785547481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/AgentProject$Java.coverage" NAME="Java Coverage Results" MODIFIED="1492534268595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -25,10 +26,13 @@
       <file leaf-file-name="Group6.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Group6.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1716">
-              <caret line="103" column="46" lean-forward="false" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+            <state relative-caret-position="-904">
+              <caret line="99" column="39" lean-forward="true" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
               <folding>
-                <element signature="e#2142#2158#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+                <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+                <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
               </folding>
             </state>
           </provider>
@@ -37,12 +41,9 @@
       <file leaf-file-name="OpponentModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-              <folding>
-                <element signature="e#767#768#0" expanded="true" />
-                <element signature="e#808#809#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="546">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,6 +63,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -79,6 +81,8 @@
       <list>
         <option value="$PROJECT_DIR$/negosimulator.jar!/negotiator/parties/AbstractNegotiationParty.class" />
         <option value="$PROJECT_DIR$/src/OpponentModel.java" />
+        <option value="$PROJECT_DIR$/negosimulator.jar!/negotiator/Deadline.class" />
+        <option value="$PROJECT_DIR$/negosimulator.jar!/negotiator/timeline/TimeLineInfo.class" />
         <option value="$PROJECT_DIR$/src/Group6.java" />
       </list>
     </option>
@@ -107,27 +111,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AgentProject" />
+              <option name="myItemId" value="CS462_AgentProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AgentProject" />
+              <option name="myItemId" value="CS462_AgentProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AgentProject" />
+              <option name="myItemId" value="CS462_AgentProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AgentProject" />
+              <option name="myItemId" value="CS462_AgentProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -135,9 +137,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CS462_AgentProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CS462_AgentProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="repository" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -147,6 +169,178 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.classpath</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Group6.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/OpponentModel.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/PhoenixParty1742854290.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/PhoenixParty502057286.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-220915.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-220915.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221008.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221008.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221312.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221312.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221420.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221420.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221816.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221816.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221943.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-221943.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-222904.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170420-222904.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-143847.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-143847.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-144129.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-144129.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-144621.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-144621.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-145854.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-145854.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-145934.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-145934.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-150107.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-150107.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-150656.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-150656.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-151937.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-151937.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-153552.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-153552.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-153722.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-153722.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-154047.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-154047.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-154534.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-154534.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-173656.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-173656.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174048.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174048.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174409.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174409.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174451.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174451.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174557.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174557.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174655.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-174655.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175048.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175048.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175459.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175459.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175544.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175544.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175810.csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/Log-Session_20170421-175810.xml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -422,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492528931145</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated bidding strategy">
+      <created>1492619902982</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1492619902982</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -447,8 +648,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38419318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3677278" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -475,7 +677,8 @@
     <MESSAGE value="Updated agent's offer strategy" />
     <MESSAGE value="Implemented Anger Agent biddin method" />
     <MESSAGE value="Implemented anger meter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented anger meter" />
+    <MESSAGE value="Updated bidding strategy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated bidding strategy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -493,19 +696,40 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="416">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1728">
+          <caret line="127" column="74" lean-forward="false" selection-start-line="127" selection-start-column="74" selection-end-line="127" selection-end-column="74" />
           <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -514,7 +738,94 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -523,10 +834,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -535,7 +843,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -544,10 +855,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -556,7 +864,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -565,10 +876,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -577,7 +885,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -586,10 +897,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -598,7 +906,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -607,10 +918,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -619,7 +927,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -628,17 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -677,12 +977,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/negotiator/repository/ProfileRepItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/negosimulator.jar!/negotiator/Deadline.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-433">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/negosimulator.jar!/negotiator/timeline/TimeLineInfo.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partyrepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/negosimulator.jar!/negotiator/bidding/BidDetails.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/negosimulator.jar!/negotiator/boaframework/SortedOutcomeSpace.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="44" column="24" lean-forward="true" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Group6.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1716">
-          <caret line="103" column="46" lean-forward="false" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+        <state relative-caret-position="-904">
+          <caret line="99" column="39" lean-forward="true" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
           <folding>
-            <element signature="e#2142#2158#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <marker date="1492787279854" expanded="true" signature="5128:6868" ph="{...}" />
+            <marker date="1492787279854" expanded="true" signature="5258:5400" ph="//..." />
           </folding>
         </state>
       </provider>

@@ -2,6 +2,7 @@ import java.util.*;
 import list.Tuple;
 import negotiator.*;
 import negotiator.actions.*;
+import negotiator.boaframework.SortedOutcomeSpace;
 import negotiator.parties.AbstractNegotiationParty;
 import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
@@ -11,10 +12,12 @@ public class Group6 extends AbstractNegotiationParty {
 
     private Bid lastReceivedBid = null;
     private Bid bestReceivedBid = null;
+    private SortedOutcomeSpace sos;
+    private String deadLineType;
     private double numberOfRounds = 0;
-    private double roundsToGetAlmostMad = 0;
-    private double roundsToGetMad = 0;
-    private double roundLimit = 0;
+    private double timeToGetAlmostMad = 0;
+    private double timeToGetMad = 0;
+    private double negotiationLimit = 0;
     private double threshold = 0.8;
     private boolean control = true;
     private StandardInfoList history;
@@ -25,16 +28,18 @@ public class Group6 extends AbstractNegotiationParty {
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-        
+
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
         } catch (Exception e) {
             System.out.println("An exception thrown at init..");
         }
 
-        roundLimit = dl.getValue();
-        roundsToGetMad = roundLimit - roundLimit / 10;
-        roundsToGetAlmostMad = (int) roundsToGetMad / 2;
+        sos = new SortedOutcomeSpace(utilitySpace);
+        deadLineType = dl.getType().toString();
+        negotiationLimit = dl.getValue();
+        timeToGetMad = (negotiationLimit / 10) * 8; // 80%
+        timeToGetAlmostMad = negotiationLimit / 2; // 50%
         
         System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
         System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
@@ -63,25 +68,26 @@ public class Group6 extends AbstractNegotiationParty {
 
     @Override
     public String getDescription() {
-        return "accept Nth offer";
+        return "CS462_Group6 Agent";
     }
 
     @Override
     public Action chooseAction(List<Class<? extends Action>> validActions) { // Your agent's turn
         numberOfRounds++;
-        
+
         if (!history.isEmpty() && control) {
             analyzeHistory();
         }
 
-        if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate a random offer
-            return new Offer(getPartyId(), generateRandomBid());
+        if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate an offer
+            return new Offer(getPartyId(), generateBid());
         }
         else { // Else, Generate an offer
             if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
 
-            if (utilitySpace.getUtility(lastReceivedBid) > threshold) { // If utility of the last received bid is higher than our threshold Accept
+            if (utilitySpace.getUtility(lastReceivedBid) > threshold) {
+                // If utility of the last received bid is higher than our threshold Accept
                 return new Accept(getPartyId(), lastReceivedBid);
             } else { // Else, generate a new offer */
                 Offer newOffer = new Offer(getPartyId(), generateBid());
@@ -125,41 +131,49 @@ public class Group6 extends AbstractNegotiationParty {
     
     private Bid generateBid() {
     	Bid bestBid = null;
-    	Bid startingBids = null;
+    	Bid initialBid;
 
         try {
             bestBid = utilitySpace.getMaxUtilityBid();
             // TODO Implement opponent modeling to estimate Threshold Utility
             // TODO Decide TempThreshold, make it relative to real Threshold
-            // TODO Make this work with Time Limited negotiations either
             double tempThreshold = 0.7;
-            
-            if (numberOfRounds < roundsToGetMad) {
-                if (numberOfRounds < roundsToGetAlmostMad)
-                    tempThreshold = 0.5;
-                
+            double currentStatus = numberOfRounds;
+
+            if(deadLineType.equals("TIME"))
+                currentStatus = timeline.getTime() * timeline.getTotalTime(); // If negotiation is Time limited
+
+            if(currentStatus < timeToGetMad){
+                if(currentStatus < timeToGetAlmostMad)
+                    tempThreshold = 0.6;
+
                 for (int trial = 0; true; ++trial) {
-                    startingBids = generateRandomBid();
-                    
-                    if (utilitySpace.getUtility(startingBids) > tempThreshold || trial > 200)
-                    	break;
+                    initialBid = generateRandomBid();
+
+                    if (utilitySpace.getUtility(initialBid) > tempThreshold || trial > 200)
+                        break;
                 }
 
-                bestBid = startingBids;
+                System.out.println("STATUS : " + currentStatus);
+                System.out.println("THRESHOLD :" + tempThreshold);
+                bestBid = initialBid;
             }
 
-            /* Offer your best bid in every 5 rounds */
-            if (numberOfRounds % 5 == 0)
+            /* If deadline is approaching offer the best received offer (last 5% of limit) */
+            if(currentStatus > (negotiationLimit / 100) * 95)
+                bestBid = bestReceivedBid;
+            /* Offer your best bid in every 10 rounds */
+            if (numberOfRounds % 10 == 0)
                 bestBid = utilitySpace.getMaxUtilityBid();
 
-            /* If deadline is approaching offer the best received offer */
-            if (roundLimit - numberOfRounds < 2)
-                bestBid = bestReceivedBid;
 
-        } catch (Exception e) {
-            System.out.println("An exception thrown :(");
+        }
+        catch (Exception e) {
+            System.out.println("An exception thrown while generating bid");
         }
 
+        System.out.println("Bid : " + bestBid);
+        System.out.println("Utility : " + utilitySpace.getUtility(bestBid));
         return bestBid;
     }
 
