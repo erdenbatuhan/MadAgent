@@ -1,8 +1,11 @@
 import java.util.*;
+
+import agents.anac.y2012.MetaAgent.agents.WinnerAgent.opponentOffers;
 import list.Tuple;
 import negotiator.*;
 import negotiator.actions.*;
 import negotiator.boaframework.SortedOutcomeSpace;
+import negotiator.issue.Value;
 import negotiator.parties.AbstractNegotiationParty;
 import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
@@ -10,6 +13,7 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class Group6 extends AbstractNegotiationParty {
 
+	private OpponentModel opponentModel = null;
     private Bid lastReceivedBid = null;
     private Bid bestReceivedBid = null;
     private SortedOutcomeSpace sortedOutcomeSpace = null;
@@ -20,7 +24,9 @@ public class Group6 extends AbstractNegotiationParty {
     private double negotiationLimit = 0;
     private double threshold = 0.8;
     private boolean control = true;
-    private StandardInfoList history = null;;
+    private StandardInfoList history = null;
+    
+    Value last = null;
 
     /* This will be called before the negotiation starts */
     /* initialize variables here */
@@ -29,8 +35,8 @@ public class Group6 extends AbstractNegotiationParty {
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
 
-        int numberOfIssues = utilitySpace.getDomain().getIssues().size();
-
+        opponentModel = new OpponentModel(utilitySpace.getDomain().getIssues());
+        
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
         } catch (Exception e) {
@@ -105,7 +111,13 @@ public class Group6 extends AbstractNegotiationParty {
         /* opponent model can be used here */
         if (action instanceof Offer) {
             lastReceivedBid = ((Offer) action).getBid();
+            
+            opponentModel.addPreference(lastReceivedBid);
+            opponentModel.calculateMostPreferredBid(lastReceivedBid);
+            
+            System.out.println("-> Bid: " + opponentModel.getMostPreferredBid());
         }
+        
         if (!history.isEmpty() && control)
             analyzeHistory();
     }
@@ -173,6 +185,9 @@ public class Group6 extends AbstractNegotiationParty {
     @Override
     public HashMap<String, String> negotiationEnded(Bid acceptedBid) {
     	System.out.println("Negotiation has ended..");
+    	
+    	opponentModel.printPreferences();
+    	
 		return null;
     }
 }
