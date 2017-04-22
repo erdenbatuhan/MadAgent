@@ -30,7 +30,8 @@ public class Group6 extends AbstractNegotiationParty {
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
 
-        opponentModel = new OpponentModel(utilitySpace.getDomain(),tl, dl.getValue());
+        deadLineType = dl.getType().toString();
+        opponentModel = new OpponentModel(utilitySpace.getDomain(),tl, dl.getValue(), deadLineType);
         sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
         
         try {
@@ -38,8 +39,7 @@ public class Group6 extends AbstractNegotiationParty {
         } catch (Exception e) {
             System.out.println("An exception thrown at init..");
         }
-        
-        deadLineType = dl.getType().toString();
+
         negotiationLimit = dl.getValue();
         
         timeToGetMad = negotiationLimit * 4 / 5; // 80%

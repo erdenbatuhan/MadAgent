@@ -4,7 +4,6 @@
     <list default="true" id="29a11bde-28d9-465f-8293-ce94b78274a3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Group6.java" afterPath="$PROJECT_DIR$/src/Group6.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OpponentModel.java" afterPath="$PROJECT_DIR$/src/OpponentModel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,24 +23,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Group6.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Group6.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Group6.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="97" column="57" lean-forward="false" selection-start-line="97" selection-start-column="57" selection-end-line="97" selection-end-column="57" />
+            <state relative-caret-position="351">
+              <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-                <element signature="e#5361#5377#0" expanded="true" />
+                <element signature="e#5375#5391#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpponentModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OpponentModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-557">
+            <state relative-caret-position="1123">
               <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
               <folding />
             </state>
@@ -86,8 +85,8 @@
         <option value="$PROJECT_DIR$/src/Opponent.java" />
         <option value="$PROJECT_DIR$/negosimulator.jar!/negotiator/issue/Objective.class" />
         <option value="$PROJECT_DIR$/negosimulator.jar!/negotiator/issue/Issue.class" />
-        <option value="$PROJECT_DIR$/src/Group6.java" />
         <option value="$PROJECT_DIR$/src/OpponentModel.java" />
+        <option value="$PROJECT_DIR$/src/Group6.java" />
       </list>
     </option>
   </component>
@@ -472,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492853675614</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="OpponentModel update">
+      <created>1492873276351</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1492873276351</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -558,7 +564,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -578,7 +584,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -590,7 +596,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -610,7 +616,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -630,7 +636,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -650,7 +656,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -670,7 +676,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -690,7 +696,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -710,7 +716,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -730,7 +736,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,7 +756,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -770,7 +776,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -790,7 +796,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -810,7 +816,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -830,7 +836,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
+            <element signature="e#5375#5391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -977,23 +983,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Group6.java">
+    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="97" column="57" lean-forward="false" selection-start-line="97" selection-start-column="57" selection-end-line="97" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
-            <element signature="e#5361#5377#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1123">
+          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OpponentModel.java">
+    <entry file="file://$PROJECT_DIR$/src/Group6.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-557">
-          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="351">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#analyzeHistory#0;class#Group6#0" expanded="false" />
+            <element signature="e#5375#5391#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
