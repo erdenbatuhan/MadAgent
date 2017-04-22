@@ -1,6 +1,7 @@
 import java.util.*;
 import negotiator.*;
 import negotiator.issue.*;
+import negotiator.timeline.TimeLineInfo;
 
 public class OpponentModel {
     
@@ -11,18 +12,25 @@ public class OpponentModel {
     }
 	
 	private Domain domain = null;
+	private TimeLineInfo timeLineInfo = null;
+	private double negotiationLimit;
 	private int numberOfIssues = 0;
-    private List<Preference> preferences = null;
+	private List<Preference> preferences = null;
+	private double concedeRatio = 0;
+	private String dlType;
 	private Bid mostPreferredBid = null;
 
-    public OpponentModel(Domain domain) {
+    public OpponentModel(Domain domain, TimeLineInfo tl, double negotiationLimit, String dlType) {
     	this.domain = domain;
+		this.timeLineInfo = tl;
+    	this.negotiationLimit = negotiationLimit;
+    	this.dlType = dlType;
     	numberOfIssues = domain.getIssues().size();
     	
     	preferences = new ArrayList<Preference>();
     }
     
-    public void addPreference(Bid lastReceivedBid) {
+    public void addPreference(Bid lastReceivedBid, double numberOfRounds) {
     	for (int issueNr = 1; issueNr <= numberOfIssues; issueNr++) {
     		Preference preference = new Preference();
     		
@@ -33,11 +41,16 @@ public class OpponentModel {
     		int index = getIndexIfPreferredBefore(preference.value);
     		
     		if (index == -1)
-    			preferences.add(preference);
+				preferences.add(preference);
     		else
     			preferences.get(index).count++;    		
     	}
-    	
+		/* Update the concede ratio whenever new item is offered */
+		double timePassed = numberOfRounds;
+		if(dlType.equals("TIME"))
+			timePassed = timeLineInfo.getTime() * timeLineInfo.getTotalTime();
+
+    	concedeRatio = preferences.size() * (timePassed / negotiationLimit);
     	sortPreferences();
     }
     
@@ -74,7 +87,14 @@ public class OpponentModel {
     	mostPreferredBid = new Bid(domain, values);
     }
 
-	public Bid getMostPreferredBid() {
-		return mostPreferredBid;
+	public Bid getMostPreferredBid() {return mostPreferredBid;}
+
+	public boolean isBoulware(){
+    	/* Returns true if the opponent is boulware */
+		boolean result = true;
+    	if(concedeRatio > 0.1) // TODO UPDATE VALUE
+    		result = false;
+
+		return result;
 	}
 }
