@@ -19,10 +19,10 @@ public class OpponentModel {
 	private double concedeRatio = 0;
 	private List<Preference> preferences = null;
 
-    public OpponentModel(Domain domain, TimeLineInfo tl, Deadline dl) {
+    public OpponentModel(Domain domain, Deadline dl, TimeLineInfo tl) {
     	this.domain = domain;
-		this.tl = tl;
     	this.dl = dl;
+		this.tl = tl;
 		
     	numberOfIssues = domain.getIssues().size();
     	preferences = new ArrayList<Preference>();

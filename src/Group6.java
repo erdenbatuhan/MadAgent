@@ -30,7 +30,7 @@ public class Group6 extends AbstractNegotiationParty {
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
 
-        opponentModel = new OpponentModel(utilitySpace.getDomain(), tl, dl);
+        opponentModel = new OpponentModel(utilitySpace.getDomain(), dl, tl);
         sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
         
         try {
