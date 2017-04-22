@@ -18,7 +18,7 @@ public class OpponentModel {
 	private int numberOfIssues = 0;
 	private double concedeRatio = 0;
 	private double[] weights = null;
-	private boolean isBoulware = null;
+	private boolean isBoulware = false;
 	private List<Preference> preferences = null;
 
     public OpponentModel(Domain domain, Deadline dl, TimeLineInfo tl) {
