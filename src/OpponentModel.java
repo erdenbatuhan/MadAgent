@@ -99,18 +99,19 @@ public class OpponentModel {
     public void calculateWeights() {
     	double sum = 0;
     	
-    	for (int i = 0; i < preferences.size(); i++) {
+    	for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
     		Issue currentIssue = preferences.get(i).issue;	
     		
     		if (weights[currentIssue.getNumber()] == 0) {
     			weights[currentIssue.getNumber()] = preferences.get(i).count;
     			sum += preferences.get(i).count;
+    			
+    			j++;
     		}
     	}
     	
-    	for (int i = 1; i < weights.length; i++) {
+    	for (int i = 1; i < weights.length; i++)
     		weights[i] /= sum;
-    	}
     }
 
 	public Bid getMostPreferredBid() {
@@ -126,12 +127,15 @@ public class OpponentModel {
 		return result;
 	}
     
-    public void printPreferences() {		
+    public void report() {
     	for (Preference preference : preferences) {		
     		System.out.println("Issue: " + preference.issue);		
     		System.out.println("Value: " + preference.value);		
     		System.out.println("Count: " + preference.count);		
     		System.out.println(preferences.size());		
     	}
+    	
+    	for (int i = 1; i < weights.length; i++)
+    		System.out.println("Weight of issue " + i + " is " + weights[i]);
     }
 }

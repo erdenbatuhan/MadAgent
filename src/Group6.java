@@ -180,8 +180,9 @@ public class Group6 extends AbstractNegotiationParty {
     @Override
     public HashMap<String, String> negotiationEnded(Bid acceptedBid) {
     	System.out.println("Negotiation has ended..");
-    	opponentModel.printPreferences();
-    	opponentModel.calculateWeights();
+    	
+        opponentModel.calculateWeights();
+    	opponentModel.report();
     	
 		return null;
     }
