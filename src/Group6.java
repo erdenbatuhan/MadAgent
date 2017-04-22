@@ -95,11 +95,6 @@ public class Group6 extends AbstractNegotiationParty {
             
             opponentModel.addPreference(lastReceivedBid, numberOfRounds);
             opponentModel.calculateMostPreferredBid(lastReceivedBid);
-
-            System.out.println("-> Last Received Bid: " + lastReceivedBid);
-            System.out.println("   -> " + utilitySpace.getUtility(lastReceivedBid));
-            System.out.println("-> Most Preferred Bid: " + opponentModel.getMostPreferredBid());
-            System.out.println("   -> " + utilitySpace.getUtility(opponentModel.getMostPreferredBid()));
         }
         
         if (!history.isEmpty() && control)
@@ -168,8 +163,8 @@ public class Group6 extends AbstractNegotiationParty {
                 bestBid = initialBid;
             }
 
-            /* If deadline is approaching, offer the best received offer (last 5% of limit) */
-            if (currentStatus > (negotiationLimit / 100) * 95)
+            /* If deadline is approaching, offer the best received offer (last 1% of limit) */
+            if (currentStatus > (negotiationLimit / 100) * 99)
                 bestBid = bestReceivedBid;
             
             /* Offer your best bid in every 10 rounds */

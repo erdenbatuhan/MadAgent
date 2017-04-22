@@ -43,9 +43,7 @@ public class OpponentModel {
     		else
     			preferences.get(index).count++;    		
     	}
-		
-    	System.out.println(preferences.size());
-    	
+
     	setConcedeRatio(numberOfRounds);
     	sortPreferences();
     }
