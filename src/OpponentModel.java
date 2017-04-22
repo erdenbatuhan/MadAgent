@@ -93,10 +93,6 @@ public class OpponentModel {
 	public Bid getMostPreferredBid() {
 		return mostPreferredBid;
 	}
-
-	// hello
-	
-	
 	
 	public boolean isBoulware() {
     	/* Returns true if the opponent is boulware */
