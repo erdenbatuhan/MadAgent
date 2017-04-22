@@ -10,7 +10,6 @@ import negotiator.utility.AbstractUtilitySpace;
 
 public class Group6 extends AbstractNegotiationParty {
 
-	private Opponent opponentModel = null;
     private Bid lastReceivedBid = null;
     private Bid bestReceivedBid = null;
     private SortedOutcomeSpace sortedOutcomeSpace = null;
@@ -103,9 +102,9 @@ public class Group6 extends AbstractNegotiationParty {
         /* Because action can be accept or offer */
         /* New class for OpponentModeling can be good */
         /* opponent model can be used here */
-        if (action instanceof Offer)
+        if (action instanceof Offer) {
             lastReceivedBid = ((Offer) action).getBid();
-
+        }
         if (!history.isEmpty() && control)
             analyzeHistory();
     }
