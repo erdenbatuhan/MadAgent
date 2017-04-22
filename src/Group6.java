@@ -31,15 +31,17 @@ public class Group6 extends AbstractNegotiationParty {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
 
         opponentModel = new OpponentModel(utilitySpace.getDomain());
+        sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
         
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
         } catch (Exception e) {
             System.out.println("An exception thrown at init..");
         }
-        sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
+        
         deadLineType = dl.getType().toString();
         negotiationLimit = dl.getValue();
+        
         timeToGetMad = negotiationLimit * 4 / 5; // 80%
         timeToGetAlmostMad = negotiationLimit / 2; // 50%
 
@@ -51,21 +53,6 @@ public class Group6 extends AbstractNegotiationParty {
 
         /* Use history to get previous negotiation utilities */
         history = (StandardInfoList) getData().get();
-
-//        if (!history.isEmpty()) { // An example of using the history
-//          /* Compute for each party the maximum utility of the bids in last session. */
-//            Map<String, Double> maxutils = new HashMap<String, Double>();
-//            StandardInfo lastinfo = history.get(history.size() - 1); // Most recent history
-//
-//            for (Tuple<String, Double> offered : lastinfo.getUtilities()) {
-//                String party = offered.get1();
-//                Double util = offered.get2();
-//
-//                maxutils.put(party, maxutils.containsKey(party) ? Math.max(maxutils.get(party), util) : util);
-//            }
-//
-//            System.out.println(maxutils); // Notice tournament suppresses all output.
-//        }
     }
 
     @Override
@@ -121,7 +108,8 @@ public class Group6 extends AbstractNegotiationParty {
     }
 
     private void analyzeHistory() {
-        control = false;
+    	control = false;
+    	
         // from recent to older history records
         for (int h = history.size() - 1, counter = 0; h >= 0; h--, counter = 0) {
             System.out.println("History index:  " + h);
@@ -136,6 +124,21 @@ public class Group6 extends AbstractNegotiationParty {
                 if (++counter == 3)
                     break;
             }
+        }
+
+        if (!history.isEmpty()) { // An example of using the history
+          /* Compute for each party the maximum utility of the bids in last session. */
+            Map<String, Double> maxutils = new HashMap<String, Double>();
+            StandardInfo lastinfo = history.get(history.size() - 1); // Most recent history
+
+            for (Tuple<String, Double> offered : lastinfo.getUtilities()) {
+                String party = offered.get1();
+                Double util = offered.get2();
+
+                maxutils.put(party, maxutils.containsKey(party) ? Math.max(maxutils.get(party), util) : util);
+            }
+
+            System.out.println("Max Utils: " + maxutils);
         }
     }
 
