@@ -28,13 +28,14 @@ public class Group6 extends AbstractNegotiationParty {
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
         super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-        
+
+        int numberOfIssues = utilitySpace.getDomain().getIssues().size();
+
         try {
             bestReceivedBid = utilSpace.getMinUtilityBid();
         } catch (Exception e) {
             System.out.println("An exception thrown at init..");
         }
-
         sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
         deadLineType = dl.getType().toString();
         negotiationLimit = dl.getValue();
