@@ -19,7 +19,7 @@ public class Group6 extends AbstractNegotiationParty {
     private double numberOfRounds = 0;
     private double timeToGetAlmostMad = 0;
     private double timeToGetMad = 0;
-    private double threshold = 0.8;
+    private double threshold = 0.85;
     private boolean control = true;
     private StandardInfoList history = null;
 
