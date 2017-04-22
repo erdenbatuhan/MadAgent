@@ -44,6 +44,8 @@ public class OpponentModel {
     			preferences.get(index).count++;    		
     	}
 		
+    	System.out.println(preferences.size());
+    	
     	setConcedeRatio(numberOfRounds);
     	sortPreferences();
     }
@@ -60,7 +62,7 @@ public class OpponentModel {
 		double timePassed = numberOfRounds;
 		
 		if (dl.getType().toString().equals("TIME"))
-			timePassed = tl.getCurrentTime();
+			timePassed = tl.getTime() * tl.getTotalTime();
 
     	concedeRatio = preferences.size() * (timePassed / dl.getValue());
     }

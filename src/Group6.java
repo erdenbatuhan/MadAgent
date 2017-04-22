@@ -152,8 +152,8 @@ public class Group6 extends AbstractNegotiationParty {
             double currentStatus = numberOfRounds;
 
             if (negotiationType.equals("TIME"))
-                currentStatus = timeline.getCurrentTime(); // If negotiation is Time limited
-
+                currentStatus = timeline.getTime() * timeline.getTotalTime();
+            
             if (currentStatus < timeToGetMad) {
                 if (currentStatus < timeToGetAlmostMad)
                     tempThreshold = threshold * 4 / 5; // threshold * 0.8
