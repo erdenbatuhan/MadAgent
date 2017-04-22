@@ -19,7 +19,7 @@ public class Group6 extends AbstractNegotiationParty {
     private double numberOfRounds = 0;
     private double timeToGetAlmostMad = 0;
     private double timeToGetMad = 0;
-    private double threshold = 0.85;
+    private double threshold = 0.95;
     private boolean control = true;
     private StandardInfoList history = null;
 
@@ -143,7 +143,7 @@ public class Group6 extends AbstractNegotiationParty {
         try {
             bestBid = utilitySpace.getMaxUtilityBid();
             // TODO Implement opponent modeling to estimate Threshold Utility
-            double tempThreshold = threshold * 9 / 10; // threshold * 0.9
+            double tempThreshold = threshold * 0.95; // threshold * 0.95
             double currentStatus = numberOfRounds;
 
             if (negotiationType.equals("TIME"))
@@ -151,7 +151,7 @@ public class Group6 extends AbstractNegotiationParty {
             
             if (currentStatus < timeToGetMad) {
                 if (currentStatus < timeToGetAlmostMad)
-                    tempThreshold = threshold * 4 / 5; // threshold * 0.8
+                    tempThreshold = threshold * 0.9; // threshold * 0.9
 
                 for (int trial = 0; true; ++trial) {
                     initialBid = generateRandomBid();
