@@ -165,7 +165,7 @@ public class Group6 extends AbstractNegotiationParty {
 
             /* If deadline is approaching, offer the best received offer (last 1% of limit) */
             if (currentStatus > (negotiationLimit / 100) * 99)
-                bestBid = bestReceivedBid;
+                bestBid = bestReceivedBid; //TODO GENERATE A BID USING WEIGHTS HERE
             
             /* Offer your best bid in every 10 rounds */
             if (numberOfRounds % 10 == 0)
