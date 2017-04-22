@@ -5,28 +5,26 @@ import negotiator.timeline.TimeLineInfo;
 
 public class OpponentModel {
     
-    private class Preference {	
+    private class Preference {
     	private Issue issue;
     	private Value value;
     	private int count;
     }
 	
 	private Domain domain = null;
-	private TimeLineInfo timeLineInfo = null;
-	private double negotiationLimit;
+	private TimeLineInfo tl = null;
+	private Deadline dl = null;
+	private Bid mostPreferredBid = null; 
 	private int numberOfIssues = 0;
-	private List<Preference> preferences = null;
 	private double concedeRatio = 0;
-	private String dlType;
-	private Bid mostPreferredBid = null;
+	private List<Preference> preferences = null;
 
-    public OpponentModel(Domain domain, TimeLineInfo tl, double negotiationLimit, String dlType) {
+    public OpponentModel(Domain domain, TimeLineInfo tl, Deadline dl) {
     	this.domain = domain;
-		this.timeLineInfo = tl;
-    	this.negotiationLimit = negotiationLimit;
-    	this.dlType = dlType;
+		this.tl = tl;
+    	this.dl = dl;
+		
     	numberOfIssues = domain.getIssues().size();
-    	
     	preferences = new ArrayList<Preference>();
     }
     
@@ -45,12 +43,8 @@ public class OpponentModel {
     		else
     			preferences.get(index).count++;    		
     	}
-		/* Update the concede ratio whenever new item is offered */
-		double timePassed = numberOfRounds;
-		if(dlType.equals("TIME"))
-			timePassed = timeLineInfo.getTime() * timeLineInfo.getTotalTime();
-
-    	concedeRatio = preferences.size() * (timePassed / negotiationLimit);
+		
+    	setConcedeRatio(numberOfRounds);
     	sortPreferences();
     }
     
@@ -60,6 +54,15 @@ public class OpponentModel {
     			return i;
     	
     	return -1;
+    }
+    
+    private void setConcedeRatio(double numberOfRounds) {
+		double timePassed = numberOfRounds;
+		
+		if (dl.getType().toString().equals("TIME"))
+			timePassed = tl.getCurrentTime();
+
+    	concedeRatio = preferences.size() * (timePassed / dl.getValue());
     }
     
     private void sortPreferences() {
@@ -87,9 +90,11 @@ public class OpponentModel {
     	mostPreferredBid = new Bid(domain, values);
     }
 
-	public Bid getMostPreferredBid() {return mostPreferredBid;}
+	public Bid getMostPreferredBid() {
+		return mostPreferredBid;
+	}
 
-	public boolean isBoulware(){
+	public boolean isBoulware() {
     	/* Returns true if the opponent is boulware */
 		boolean result = true;
     	if(concedeRatio > 0.1) // TODO UPDATE VALUE
