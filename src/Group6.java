@@ -94,7 +94,7 @@ public class Group6 extends AbstractNegotiationParty {
             lastReceivedBid = ((Offer) action).getBid();
             
             opponentModel.addPreference(lastReceivedBid, numberOfRounds);
-            opponentModel.calculateMostPreferredBid(lastReceivedBid);
+            opponentModel.computeMostPreferredBid(lastReceivedBid);
         }
         
         if (!history.isEmpty() && control)
@@ -180,6 +180,9 @@ public class Group6 extends AbstractNegotiationParty {
     @Override
     public HashMap<String, String> negotiationEnded(Bid acceptedBid) {
     	System.out.println("Negotiation has ended..");
+    	opponentModel.printPreferences();
+    	opponentModel.calculateWeights();
+    	
 		return null;
     }
 }

@@ -17,6 +17,8 @@ public class OpponentModel {
 	private Bid mostPreferredBid = null; 
 	private int numberOfIssues = 0;
 	private double concedeRatio = 0;
+	private double[] weights = null;
+	private boolean isBoulware = null;
 	private List<Preference> preferences = null;
 
     public OpponentModel(Domain domain, Deadline dl, TimeLineInfo tl) {
@@ -25,6 +27,8 @@ public class OpponentModel {
 		this.tl = tl;
 		
     	numberOfIssues = domain.getIssues().size();
+    	
+    	weights = new double[numberOfIssues + 1];
     	preferences = new ArrayList<Preference>();
     }
     
@@ -74,7 +78,7 @@ public class OpponentModel {
     	});
     }
     
-    public void calculateMostPreferredBid(Bid lastReceivedBid) {
+    public void computeMostPreferredBid(Bid lastReceivedBid) {
     	HashMap<Integer, Value> values = new HashMap<Integer, Value>();
     	
     	for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
@@ -89,6 +93,25 @@ public class OpponentModel {
     	
     	mostPreferredBid = new Bid(domain, values);
     }
+    
+    /* For each issue, the number of times that the opponent chooses the value he loves the most. */
+    /* Then normalize them, this will give you the weights. */
+    public void calculateWeights() {
+    	double sum = 0;
+    	
+    	for (int i = 0; i < preferences.size(); i++) {
+    		Issue currentIssue = preferences.get(i).issue;	
+    		
+    		if (weights[currentIssue.getNumber()] == 0) {
+    			weights[currentIssue.getNumber()] = preferences.get(i).count;
+    			sum += preferences.get(i).count;
+    		}
+    	}
+    	
+    	for (int i = 1; i < weights.length; i++) {
+    		weights[i] /= sum;
+    	}
+    }
 
 	public Bid getMostPreferredBid() {
 		return mostPreferredBid;
@@ -102,4 +125,13 @@ public class OpponentModel {
 
 		return result;
 	}
+    
+    public void printPreferences() {		
+    	for (Preference preference : preferences) {		
+    		System.out.println("Issue: " + preference.issue);		
+    		System.out.println("Value: " + preference.value);		
+    		System.out.println("Count: " + preference.count);		
+    		System.out.println(preferences.size());		
+    	}
+    }
 }
