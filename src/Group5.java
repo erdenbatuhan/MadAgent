@@ -107,7 +107,6 @@ public class Group5 extends AbstractNegotiationParty {
             	}
             }
         } catch (Exception e) {
-        	e.printStackTrace();
             System.out.println("An exception thrown while generating bid..");
         }
 
