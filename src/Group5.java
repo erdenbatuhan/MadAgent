@@ -114,11 +114,6 @@ public class Group5 extends AbstractNegotiationParty {
         return bestBid;
     }
 
-	private void sleep(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private Bid getBestBidWithThreshold(Bid bestBid, double currentStatus) throws Exception {
 		Bid initialBid = null;
 		
