@@ -11,6 +11,17 @@ import negotiator.utility.AbstractUtilitySpace;
 public class Group5 extends AbstractNegotiationParty {
 
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;
+	/* -------------------------------- RISK FUNCTION  -------------------------------- */
+	/* f <- Round number to fake (Agent will fake in every f rounds) */
+	/* c <- Risk constant */
+	/* p <- Risk parameter */
+	/* Formula -> f = c / 2 ^ p */
+	/* We choose 7 as parameter because we want our agent to be a little bit aggressive and a little bit protective */
+	private static final double RISK_CONSTANT = 100000;
+	private static final double RISK_PARAMETER = 10; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
+	private static final int ROUND_NUMBER_TO_FAKE = (int) (RISK_CONSTANT / Math.pow(2, RISK_PARAMETER));
+	/* -------------------------------- .RISK FUNCTION  -------------------------------- */
+	
 	private OpponentModel opponentModel = null;
 	private SortedOutcomeSpace sortedOutcomeSpace = null;
     private Bid lastReceivedBid = null;
@@ -20,12 +31,10 @@ public class Group5 extends AbstractNegotiationParty {
     private double numberOfRounds = 0;
     private double timeToGetAlmostMad = 0;
     private double timeToGetMad = 0;
-    private double threshold = 0.9;
+    private double threshold = 0.95;
     private int shiftBids = 0;
     private List<Bid> bidsPreferredByOpponent = null;
 
-    /* This will be called before the negotiation starts */
-    /* initialize variables here */
     @Override
     public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
                      PersistentDataContainer data) {
@@ -46,40 +55,32 @@ public class Group5 extends AbstractNegotiationParty {
         timeToGetMad = negotiationLimit * 0.8; // 80%
         timeToGetAlmostMad = timeToGetMad * 0.625; // 50%
 
-        System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
-        System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
-
         if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
             throw new IllegalStateException("need standard persistent data");
     }
 
     @Override
-    public Action chooseAction(List<Class<? extends Action>> validActions) { // Your agent's turn
+    public Action chooseAction(List<Class<? extends Action>> validActions) { // ... Your agent's turn ...
         numberOfRounds++;
 
-        if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate an offer
+        if (lastReceivedBid == null) { // You are the starter party
             return new Offer(getPartyId(), getBestBidPossible());
-        } else { // Else, Generate an offer
+        } else { // You are not the starter party
             if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
 
-            if (utilitySpace.getUtility(lastReceivedBid) > threshold) {
-                // If utility of the last received bid is higher than our threshold, Accept
+            /* If utility of the last received bid is higher than the threshold, accept the offer. Else, offer a new bid. */
+            if (utilitySpace.getUtility(lastReceivedBid) > threshold)
                 return new Accept(getPartyId(), lastReceivedBid);
-            } else { // Else, generate a new offer */
-                Offer newOffer = new Offer(getPartyId(), getBestBidPossible());
-                return new Offer(getPartyId(), newOffer.getBid());
-            }
+            else
+                return new Offer(getPartyId(), getBestBidPossible());
         }
     }
 
     @Override
-    public void receiveMessage(AgentID sender, Action action) {
+    public void receiveMessage(AgentID sender, Action action) { // ... Opponent's turn ...
         super.receiveMessage(sender, action);
-
-        /* Because action can be accept or offer */
-        /* New class for OpponentModeling can be good */
-        /* opponent model can be used here */
+        
         if (action instanceof Offer) {
             lastReceivedBid = ((Offer) action).getBid(); 
             opponentModel.offer(lastReceivedBid, numberOfRounds);
@@ -95,8 +96,17 @@ public class Group5 extends AbstractNegotiationParty {
             if (negotiationType.equals("TIME"))
                 currentStatus = timeline.getTime() * timeline.getTotalTime();
             
-            bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
-            bestBid = getBestBidToAgree(bestBid, currentStatus);
+            if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE == 0) {
+            	 for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
+            		bestBid = generateRandomBid(); // Faking
+
+     		        if (utilitySpace.getUtility(bestBid) >= threshold * 0.8)
+     		            break;
+     		    }
+            } else {
+            	bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
+            	bestBid = getBestBidToAgree(bestBid, currentStatus);
+            }
         } catch (Exception e) {
         	e.printStackTrace();
             System.out.println("An exception thrown while generating bid..");

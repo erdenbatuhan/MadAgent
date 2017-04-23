@@ -51,7 +51,7 @@ public class OpponentModel {
 		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility) / 2;
 		
 		if (finalReceivedUtility > EDGE_OF_CONCEDING)
-			boulwareLevel = 0; // Conceder
+			boulwareLevel = 0;
 		else
 			boulwareLevel = (int) ((EDGE_OF_CONCEDING - finalReceivedUtility) * BOULWARE_MULTIPLIER);
 		
