@@ -87,7 +87,7 @@ public class Group5 extends AbstractNegotiationParty {
         }
     }
 
-    private Bid getBestBidPossible() {
+    private Bid getBestBidPossible() { 
         Bid bestBid = null;
 
         try {
