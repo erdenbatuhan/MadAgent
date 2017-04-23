@@ -40,7 +40,7 @@ public class OpponentModel {
 		addPreference(lastReceivedBid);
 	}
 
-	public void decideBoulwareLevel(Bid lastReceivedBid) {
+	public void decideBoulwareLevel(Bid lastReceivedBid) { // Our boulware level
 		final double EDGE_OF_CONCEDING = threshold * 0.8;
 		
 		if (lastLastReceivedBid == null)
