@@ -9,6 +9,7 @@ import negotiator.utility.AbstractUtilitySpace;
 
 @SuppressWarnings("unused")
 public class Group5 extends AbstractNegotiationParty {
+	
 	/* ------------------------------------------------ Agent5 ------------------------------------------------
 	 * Agent Description: CS462 - Group5 Agent
 	 * Agent uses several strategies to maximize its utility along with social welfare:
@@ -24,16 +25,17 @@ public class Group5 extends AbstractNegotiationParty {
 	 * */
 
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;
-	/* -------------------------------- RISK FUNCTION  -------------------------------- */
-	/* f <- Round number to fake (Agent will fake in every f rounds) */
-	/* c <- Risk constant */
-	/* p <- Risk parameter */
-	/* Formula -> f = c / 2 ^ p */
-	/* We choose 5 as our parameter because we want our agent to be both aggressive and defensive */
+	
+	/* -------------------------------- RISK FUNCTION  --------------------------------
+     * f <- Round number to fake (Agent will fake in every f rounds)
+	 * c <- Risk constant
+	 * p <- Risk parameter
+	 * Formula -> f = c / 2 ^ p
+	 * We choose 6 as our parameter because we want our agent to be both aggressive and defensive 
+	 * */
 	private static final double RISK_CONSTANT = 100000;
 	private static final double RISK_PARAMETER = 6; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
 	private static final int ROUND_NUMBER_TO_FAKE = (int) (RISK_CONSTANT / Math.pow(2, RISK_PARAMETER));
-	/* -------------------------------- .RISK FUNCTION  -------------------------------- */
 
 	private OpponentModel opponentModel = null;
 	private SortedOutcomeSpace sortedOutcomeSpace = null;
