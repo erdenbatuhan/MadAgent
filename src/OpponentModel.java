@@ -5,10 +5,17 @@ import negotiator.timeline.TimeLineInfo;
 
 public class OpponentModel {
 
+	private static final double ONE_TENTH = 0.10;
+
 	private class Preference {
 		private Issue issue;
 		private Value value;
 		private int count;
+	}
+	
+	private class Weight {
+		private Issue issue;
+		private double value;
 	}
 
 	private Domain domain = null;
@@ -18,8 +25,6 @@ public class OpponentModel {
 	private Bid mostPreferredBid = null;
 	private int numberOfIssues = 0;
 	private int numberOfSameIssues = 0;
-	private double concedeRate = 0;
-	private double[] weights = null;
 	private byte boulwareLevel = 0;
 	private List<Preference> preferences = null;
 
@@ -28,19 +33,34 @@ public class OpponentModel {
 		this.dl = dl;
 		this.tl = tl;
 
-		numberOfIssues = domain.getIssues().size();
-
-		weights = new double[numberOfIssues + 1];
+		numberOfIssues = domain.getIssues().size();	
 		preferences = new ArrayList<Preference>();
 	}
 
-	public void addPreference(Bid lastReceivedBid, double numberOfRounds) {
-		if (firstReceivedBid == null) {
+	public void offer(Bid lastReceivedBid, double numberOfRounds) {
+		if (firstReceivedBid == null) // This is the opponent's very first bid..
 			firstReceivedBid = lastReceivedBid;
-
-		} else if (firstReceivedBid == lastReceivedBid) {
+		else if (firstReceivedBid == lastReceivedBid && numberOfSameIssues != -1) // The opponent is not conceding..
 			numberOfSameIssues++;
+		else // The opponent has started conceding..
+			numberOfSameIssues = -1;
+		
+		decideBoulwareLevel();
+		addPreference(lastReceivedBid);
+	}
+
+	public void decideBoulwareLevel() {	
+		boulwareLevel = 0;
+		
+		for (int multiplier = 1; numberOfSameIssues != -1; multiplier++) {
+			if (numberOfSameIssues > dl.getValue() * ONE_TENTH * multiplier)
+				boulwareLevel++;
+			else
+				break;
 		}
+	}
+
+	private void addPreference(Bid lastReceivedBid) {
 		for (int issueNr = 1; issueNr <= numberOfIssues; issueNr++) {
 			Preference preference = new Preference();
 
@@ -55,9 +75,9 @@ public class OpponentModel {
 			else
 				preferences.get(index).count++;
 		}
-
-		setConcedeRatio(numberOfRounds);
+		
 		sortPreferences();
+		computeMostPreferredBid(lastReceivedBid);
 	}
 
 	private int getIndexIfPreferredBefore(Value value) {
@@ -68,15 +88,6 @@ public class OpponentModel {
 		return -1;
 	}
 
-	private void setConcedeRatio(double numberOfRounds) {
-		double timePassed = numberOfRounds;
-
-		if (dl.getType().toString().equals("TIME"))
-			timePassed = tl.getTime() * tl.getTotalTime();
-
-		concedeRate = preferences.size() * (timePassed / dl.getValue());
-	}
-
 	private void sortPreferences() {
 		preferences.sort(new Comparator<Preference>() {
 			@Override
@@ -85,8 +96,8 @@ public class OpponentModel {
 			}
 		});
 	}
-
-	public void computeMostPreferredBid(Bid lastReceivedBid) {
+	
+	private void computeMostPreferredBid(Bid lastReceivedBid) {
 		HashMap<Integer, Value> values = new HashMap<Integer, Value>();
 
 		for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
@@ -101,70 +112,87 @@ public class OpponentModel {
 
 		mostPreferredBid = new Bid(domain, values);
 	}
+	
+	public List<Bid> getAcceptableBids() {
+		List<Bid> acceptableBids = new ArrayList<Bid>();
+		Weight[] weights = getWeights();
+		
+		acceptableBids.add(mostPreferredBid);
+		
+		for (int i = 1; i < weights.length; i++) {
+			Issue currentIssue = weights[i].issue;
+			addBidsWithDifferentValues(acceptableBids, currentIssue);
+		}
+		
+		return acceptableBids;
+	}
 
-	/*
-	 * For each issue, the number of times that the opponent chooses the value
-	 * he loves the most.
-	 */
-	/* Then normalize them, this will give you the weights. */
-	public void calculateWeights() {
-		double sum = 0;
+	private Weight[] getWeights() {
+		Weight[] weights = new Weight[numberOfIssues + 1];
 
+		calculateWeights(weights);
+		normalizeWeights(weights);
+		sortWeights(weights);
+		
+		return weights;
+	}
+
+	private void calculateWeights(Weight[] weights) {
+		weights[0] = new Weight();
+		
 		for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
 			Issue currentIssue = preferences.get(i).issue;
+			int issueId = currentIssue.getNumber();
 
-			if (weights[currentIssue.getNumber()] == 0) {
-				weights[currentIssue.getNumber()] = preferences.get(i).count;
-				sum += preferences.get(i).count;
-
+			if (weights[issueId] == null) {
+				weights[issueId] = new Weight();
+				
+				weights[issueId].issue = currentIssue;
+				weights[issueId].value = preferences.get(i).count;
+				
 				j++;
 			}
 		}
-
-		for (int i = 1; i < weights.length; i++)
-			weights[i] /= sum;
 	}
 
-	public Bid getMostPreferredBid() {
-		return mostPreferredBid;
-	}
-
-	public void isBoulware() {
-
-		/* Returns true if the opponent is boulware */
-
-		boolean result = false;
-		if (numberOfSameIssues < dl.getValue() * 0.20) // TODO UPDATE VALUE
-			boulwareLevel = 1;
-		if (numberOfSameIssues < dl.getValue() * 0.40) {
-			boulwareLevel = 2;
-		}
-		if (numberOfSameIssues < dl.getValue() * 0.60) {
-			boulwareLevel = 3;
-		}
-		if (boulwareLevel < dl.getValue() * 80) {
-			boulwareLevel = 4;
-
-		} else
-			conceder();
-
-	}
-
-	private void conceder() {
-
+	private void normalizeWeights(Weight[] weights) {
+		double sum = 0;
 		
+		for (int i = 1; i < weights.length; i++)
+			sum += preferences.get(i).count;
 		
+		for (int i = 1; i < weights.length; i++)
+			weights[i].value /= sum;
+	}
+	
+	private void sortWeights(Weight[] weights) {
+		Arrays.sort(weights, new Comparator<Weight>() {
+			@Override
+			public int compare(Weight a, Weight b) {
+				if (a.value > b.value) return 1;
+				if (a.value < b.value) return -1;
+				
+				return 0;
+			}
+		});
 	}
 
-	public void report() {
-		for (Preference preference : preferences) {
-			System.out.println("Issue: " + preference.issue);
-			System.out.println("Value: " + preference.value);
-			System.out.println("Count: " + preference.count);
-			System.out.println(preferences.size());
-		}
+	private void addBidsWithDifferentValues(List<Bid> acceptableBids, Issue currentIssue) {
+		int issueId = currentIssue.getNumber();
+		
+		List<Value> values = new ArrayList<Value>();
+		values.add(mostPreferredBid.getValue(issueId));
+		
+		for (int j = 0; j < preferences.size(); j++)
+			if (preferences.get(j).issue == currentIssue)
+				if (!values.contains((preferences.get(j).value)))
+					values.add(preferences.get(j).value);
 
-		for (int i = 1; i < weights.length; i++)
-			System.out.println("Weight of issue " + i + " is " + weights[i]);
+		for (int j = 1; j < values.size(); j++) {
+			HashMap<Integer, Value> valueMap = mostPreferredBid.getValues();    
+			valueMap.put(issueId, values.get(j));	
+			
+			acceptableBids.add(new Bid(domain, valueMap));
+		}
 	}
 }
