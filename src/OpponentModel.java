@@ -1,3 +1,5 @@
+/* Opponent Model of CS462 - Group5 Agent */
+
 import java.util.*;
 import negotiator.*;
 import negotiator.issue.*;
