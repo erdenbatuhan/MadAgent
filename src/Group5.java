@@ -9,7 +9,7 @@ import negotiator.utility.AbstractUtilitySpace;
 
 @SuppressWarnings("unused")
 public class Group5 extends AbstractNegotiationParty {
-	
+
 	/* ------------------------------------------------ Agent5 ------------------------------------------------
 	 * Agent Description: CS462 - Group5 Agent
 	 * Agent uses several strategies to maximize its utility along with social welfare:
@@ -25,9 +25,9 @@ public class Group5 extends AbstractNegotiationParty {
 	 * */
 
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;
-	
+
 	/* -------------------------------- RISK FUNCTION  --------------------------------
-     * f <- Round number to fake (Agent will fake in every f rounds)
+	 * f <- Round number to fake (Agent will fake in every f rounds)
 	 * c <- Risk constant
 	 * p <- Risk parameter
 	 * Formula -> f = c / 2 ^ p
@@ -126,8 +126,7 @@ public class Group5 extends AbstractNegotiationParty {
 				} else {
 					/* Agent generates a random offer with a utility that is above threshold value */
 					bestBid = getBestBidWithThreshold(bestBid, currentStatus);
-					/* Agent generates an offer to maximize agreement chance at final parts of negotiation
-            		   This method will return a bid only at specific situations, see method for more */
+					/* Agent generates an offer to maximize agreement chance at final parts of negotiation */
 					bestBid = getBestBidToAgree(bestBid, currentStatus);
 				}
 			}
