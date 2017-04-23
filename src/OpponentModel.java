@@ -48,7 +48,7 @@ public class OpponentModel {
 
 		double lastLastReceivedUtility = utilitySpace.getUtility(lastLastReceivedBid);
 		double lastReceivedUtility = utilitySpace.getUtility(lastReceivedBid);
-		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility ) / 2;
+		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility) / 2;
 		
 		if (finalReceivedUtility > EDGE_OF_CONCEDING)
 			boulwareLevel = 0; // Conceder
