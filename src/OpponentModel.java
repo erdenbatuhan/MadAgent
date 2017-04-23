@@ -1,11 +1,12 @@
 import java.util.*;
 import negotiator.*;
 import negotiator.issue.*;
-import negotiator.timeline.TimeLineInfo;
+import negotiator.utility.UtilitySpace;
 
 public class OpponentModel {
 
-	private static final double ONE_TENTH = 0.10;
+	private static final double EDGE_OF_CONCEDING = 0.7;
+	private static final int MAXIMUM_BOULWARE_LEVEL = 5;
 
 	private class Preference {
 		private Issue issue;
@@ -18,46 +19,42 @@ public class OpponentModel {
 		private double value;
 	}
 
-	private Domain domain = null;
-	private TimeLineInfo tl = null;
-	private Deadline dl = null;
-	private Bid firstReceivedBid = null;
+	private UtilitySpace utilitySpace = null;
+	private Bid lastLastReceivedBid = null;
 	private Bid mostPreferredBid = null;
+	private double threshold = 0;
+	private int boulwareLevel = 0;
 	private int numberOfIssues = 0;
-	private int numberOfSameIssues = 0;
-	private byte boulwareLevel = 0;
 	private List<Preference> preferences = null;
 
-	public OpponentModel(Domain domain, Deadline dl, TimeLineInfo tl) {
-		this.domain = domain;
-		this.dl = dl;
-		this.tl = tl;
+	public OpponentModel(UtilitySpace utilitySpace, double threshold) {
+		this.utilitySpace = utilitySpace;
+		this.threshold = threshold;
 
-		numberOfIssues = domain.getIssues().size();	
+		numberOfIssues = utilitySpace.getDomain().getIssues().size();	
 		preferences = new ArrayList<Preference>();
 	}
 
 	public void offer(Bid lastReceivedBid, double numberOfRounds) {
-		if (firstReceivedBid == null) // This is the opponent's very first bid..
-			firstReceivedBid = lastReceivedBid;
-		else if (firstReceivedBid == lastReceivedBid && numberOfSameIssues != -1) // The opponent is not conceding..
-			numberOfSameIssues++;
-		else // The opponent has started conceding..
-			numberOfSameIssues = -1;
-		
-		decideBoulwareLevel();
+		decideBoulwareLevel(lastReceivedBid);
 		addPreference(lastReceivedBid);
 	}
 
-	public void decideBoulwareLevel() {	
-		boulwareLevel = 0;
+	public void decideBoulwareLevel(Bid lastReceivedBid) {
+		if (lastLastReceivedBid == null)
+			lastLastReceivedBid = lastReceivedBid;
+
+		double lastLastReceivedUtility = utilitySpace.getUtility(lastLastReceivedBid);
+		double lastReceivedUtility = utilitySpace.getUtility(lastReceivedBid);
+		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility ) / 2;
 		
-		for (int multiplier = 1; numberOfSameIssues != -1; multiplier++) {
-			if (numberOfSameIssues > dl.getValue() * ONE_TENTH * multiplier)
-				boulwareLevel++;
-			else
-				break;
-		}
+		if (finalReceivedUtility > EDGE_OF_CONCEDING)
+			boulwareLevel = 0;
+		else
+			boulwareLevel = (int) ((EDGE_OF_CONCEDING - finalReceivedUtility) * 10);
+		
+		if (boulwareLevel > MAXIMUM_BOULWARE_LEVEL)
+			boulwareLevel = MAXIMUM_BOULWARE_LEVEL;
 	}
 
 	private void addPreference(Bid lastReceivedBid) {
@@ -110,7 +107,7 @@ public class OpponentModel {
 			}
 		}
 
-		mostPreferredBid = new Bid(domain, values);
+		mostPreferredBid = new Bid(utilitySpace.getDomain(), values);
 	}
 	
 	public List<Bid> getAcceptableBids() {
@@ -119,7 +116,7 @@ public class OpponentModel {
 		
 		acceptableBids.add(mostPreferredBid);
 		
-		for (int i = 1; i < weights.length; i++) {
+		for (int i = 1; i <= 3; i++) {
 			Issue currentIssue = weights[i].issue;
 			addBidsWithDifferentValues(acceptableBids, currentIssue);
 		}
@@ -192,7 +189,17 @@ public class OpponentModel {
 			HashMap<Integer, Value> valueMap = mostPreferredBid.getValues();    
 			valueMap.put(issueId, values.get(j));	
 			
-			acceptableBids.add(new Bid(domain, valueMap));
+			acceptableBids.add(new Bid(utilitySpace.getDomain(), valueMap));
 		}
+	}
+	
+	public double getNewThreshold() {
+		final double c = (threshold * MAXIMUM_BOULWARE_LEVEL) / (1 - threshold);
+		
+		System.out.println("Boulware Level: " + boulwareLevel);	
+		System.out.println("Old Threshold: " + threshold);	
+		System.out.println("New Threshold: " + threshold * (1 + boulwareLevel / c));
+		
+		return threshold * (1 + boulwareLevel / c);
 	}
 }
