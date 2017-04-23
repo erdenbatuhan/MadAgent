@@ -118,9 +118,14 @@ public class OpponentModel {
 		List<Bid> acceptableBids = new ArrayList<Bid>();
 		Weight[] weights = getWeights();
 		
-		for (int i = 1; i <= 3; i++) {
-			Issue currentIssue = weights[i].issue;
+		for (double i = 1, previousWeight = 0; i < weights.length; i++) {
+			if (i > 2 && weights[(int) i].value - previousWeight > 0.02)
+				break;
+			
+			Issue currentIssue = weights[(int) i].issue;
 			addBidsWithDifferentValues(acceptableBids, currentIssue);
+				
+			previousWeight = weights[(int) i].value;
 		}
 		
 		return acceptableBids;
@@ -130,14 +135,13 @@ public class OpponentModel {
 		Weight[] weights = new Weight[numberOfIssues + 1];
 
 		calculateWeights(weights);
-		normalizeWeights(weights);
 		sortWeights(weights);
 		
 		return weights;
 	}
 
 	private void calculateWeights(Weight[] weights) {
-		weights[0] = new Weight();
+		double sum = 0;
 		
 		for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
 			Issue currentIssue = preferences.get(i).issue;
@@ -149,22 +153,18 @@ public class OpponentModel {
 				weights[issueId].issue = currentIssue;
 				weights[issueId].value = preferences.get(i).count;
 				
+				sum += weights[issueId].value;
 				j++;
 			}
 		}
-	}
-
-	private void normalizeWeights(Weight[] weights) {
-		double sum = 0;
-		
-		for (int i = 1; i < weights.length; i++)
-			sum += preferences.get(i).count;
 		
 		for (int i = 1; i < weights.length; i++)
 			weights[i].value /= sum;
 	}
 	
 	private void sortWeights(Weight[] weights) {
+		weights[0] = new Weight();
+		
 		Arrays.sort(weights, new Comparator<Weight>() {
 			@Override
 			public int compare(Weight a, Weight b) {

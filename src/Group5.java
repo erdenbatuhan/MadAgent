@@ -16,9 +16,9 @@ public class Group5 extends AbstractNegotiationParty {
 	/* c <- Risk constant */
 	/* p <- Risk parameter */
 	/* Formula -> f = c / 2 ^ p */
-	/* We choose 6 as our parameter because we want our agent to be both aggressive and defensive */
+	/* We choose 5 as our parameter because we want our agent to be both aggressive and defensive */
 	private static final double RISK_CONSTANT = 100000;
-	private static final double RISK_PARAMETER = 6; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
+	private static final double RISK_PARAMETER = 5; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
 	private static final int ROUND_NUMBER_TO_FAKE = (int) (RISK_CONSTANT / Math.pow(2, RISK_PARAMETER));
 	/* -------------------------------- .RISK FUNCTION  -------------------------------- */
 	
@@ -97,10 +97,14 @@ public class Group5 extends AbstractNegotiationParty {
                 currentStatus = timeline.getTime() * timeline.getTotalTime();
             
             if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE == 0 && currentStatus <= negotiationLimit * 0.4) {
-            	bestBid = generateRandomBid();
+            	bestBid = generateRandomBid(); // Faking
             } else {
-            	bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
-            	bestBid = getBestBidToAgree(bestBid, currentStatus);
+            	if (currentStatus <= negotiationLimit * 0.2) { // Stay at 1 in the first 20% of the limit
+                	bestBid = utilitySpace.getMaxUtilityBid();
+            	} else {
+            		bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
+            		bestBid = getBestBidToAgree(bestBid, currentStatus);
+            	}
             }
         } catch (Exception e) {
         	e.printStackTrace();
