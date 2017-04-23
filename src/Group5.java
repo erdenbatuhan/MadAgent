@@ -1,5 +1,4 @@
 import java.util.*;
-import list.Tuple;
 import negotiator.*;
 import negotiator.actions.*;
 import negotiator.boaframework.SortedOutcomeSpace;
@@ -8,7 +7,6 @@ import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
 
-@SuppressWarnings("unused")
 public class Group5 extends AbstractNegotiationParty {
 
 	/* ------------------------------------------------ Agent5 ------------------------------------------------
@@ -32,10 +30,10 @@ public class Group5 extends AbstractNegotiationParty {
 	 * c <- Risk constant
 	 * p <- Risk parameter
 	 * Formula -> f = c / 2 ^ p
-	 * We choose 6 as our parameter because we want our agent to be both aggressive and defensive 
+	 * We choose 7 as our parameter because we want our agent to be both aggressive and defensive
 	 * */
 	private static final double RISK_CONSTANT = 100000;
-	private static final double RISK_PARAMETER = 6; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
+	private static final double RISK_PARAMETER = 7; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
 	private static final int ROUND_NUMBER_TO_FAKE = (int) (RISK_CONSTANT / Math.pow(2, RISK_PARAMETER));
 
 	private OpponentModel opponentModel = null;
@@ -49,8 +47,6 @@ public class Group5 extends AbstractNegotiationParty {
 	private double timeToGetMad = 0;
 	private double threshold = 0.95;
 	private int shiftBids = 0;
-	private boolean historyAnalyzed = false;
-	private StandardInfoList history;
 	private List<Bid> bidsPreferredByOpponent = null;
 
 	@Override
@@ -76,9 +72,6 @@ public class Group5 extends AbstractNegotiationParty {
 
 		if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
 			throw new IllegalStateException("need standard persistent data");
-		
-		// use history to get previous negotiation utilities
-		history = (StandardInfoList) getData().get();
 	}
 
 	@Override
@@ -89,32 +82,6 @@ public class Group5 extends AbstractNegotiationParty {
 		if (action instanceof Offer) {
 			lastReceivedBid = ((Offer) action).getBid(); 
 			opponentModel.offer(lastReceivedBid, numberOfRounds);
-		}
-		
-		if (!history.isEmpty() && !historyAnalyzed) {
-			analyzeHistory();
-		}
-	}
-	
-	private void analyzeHistory() {
-		historyAnalyzed = true;
-
-		System.out.println("History index: " + 1);
-		/* Compute for each party the maximum utility of the bids */
-		Map<String, Double> maxutils = new HashMap<String, Double>();
-		StandardInfo lastinfo = history.get(history.size() - 1);
-
-		for (Tuple<String, Double> offered : lastinfo.getUtilities()) {
-			String partyId = offered.get1();
-			double offerUtility = offered.get2();
-
-			System.out.println(lastinfo.getAgentProfiles().get("Group6@3"));
-
-			boolean isMax = false;
-			int counter = 0;
-
-			//System.out.println("PartyID: " +  partyId + " utilityForMe: " + offerUtility);
-			maxutils.put(partyId, maxutils.containsKey(partyId) ? Math.max(maxutils.get(partyId), offerUtility) : offerUtility);
 		}
 	}
 
@@ -148,19 +115,24 @@ public class Group5 extends AbstractNegotiationParty {
 			if (negotiationType.equals("TIME"))
 				currentStatus = timeline.getTime() * timeline.getTotalTime();
 
-			/* At first 40% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
-			if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE == 0 && currentStatus <= negotiationLimit * 0.4) {
+			if (currentStatus <= negotiationLimit * 0.05) {
+				/* Agent offers a bid near threshold at first 5% of negotiation */
+				bestBid = sortedOutcomeSpace.getBidNearUtility(threshold).getBid();
+
+				for (double t = threshold; true; t -= 0.01) {
+					if (utilitySpace.getUtility(bestBid) != utilitySpace.getUtility(utilitySpace.getMaxUtilityBid()))
+						break;
+
+					bestBid = sortedOutcomeSpace.getBidNearUtility(t).getBid();
+				}
+			} else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
+				/* At first 90% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
 				bestBid = generateRandomBid();
 			} else {
-				/* Agent offers 1 utility at first 10% of negotiation */
-				if (currentStatus <= negotiationLimit * 0.1) {
-					bestBid = utilitySpace.getMaxUtilityBid();
-				} else {
-					/* Agent generates a random offer with a utility that is above threshold value */
-					bestBid = getBestBidWithThreshold(bestBid, currentStatus);
-					/* Agent generates an offer to maximize agreement chance at final parts of negotiation */
-					bestBid = getBestBidToAgree(bestBid, currentStatus);
-				}
+				/* Agent generates a random offer with a utility that is above threshold value */
+				bestBid = getBestBidWithThreshold(bestBid, currentStatus);
+				/* Agent generates an offer to maximize agreement chance at final parts of negotiation */
+				bestBid = getBestBidToAgree(bestBid, currentStatus);
 			}
 		} catch (Exception e) {
 			System.out.println("An exception thrown while generating bid..");
