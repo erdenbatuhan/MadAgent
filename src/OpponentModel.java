@@ -198,9 +198,9 @@ public class OpponentModel {
 	public double getNewThreshold() {
 		final double c = (threshold * MAXIMUM_BOULWARE_LEVEL) / (1 - threshold);
 		
-		System.out.println("Boulware Level: " + boulwareLevel);	
-		System.out.println("Old Threshold: " + threshold);	
-		System.out.println("New Threshold: " + threshold * (1 + boulwareLevel / c));
+		System.out.println("-> Boulware Level: " + boulwareLevel);	
+		System.out.println("   -> Old Threshold: " + threshold);	
+		System.out.println("   -> New Threshold: " + threshold * (1 + boulwareLevel / c));
 		
 		return threshold * (1 + boulwareLevel / c);
 	}
