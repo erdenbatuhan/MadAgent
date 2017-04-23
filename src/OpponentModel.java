@@ -40,12 +40,20 @@ public class OpponentModel {
 		addPreference(lastReceivedBid);
 	}
 
-	public void decideBoulwareLevel(Bid lastReceivedBid) { // Our boulware level
+	public void decideBoulwareLevel(Bid lastReceivedBid) {
+		/* Boulware level is used for modifying the behaviour of our agent
+		 * If the boulware level is high, agent will increase threshold and will become more boulware
+
+		 * The boulware level is decided by checking the offers of the opponent
+		 * If the utilities of offers that is given by the opponent is low, according to our utility function
+		 * the boulware level will be high. */
+
+		/* After the edge of conceding, the boulware level becomes 0 which means agent is ready to concede */
 		final double EDGE_OF_CONCEDING = threshold * 0.8;
-		
+
 		if (lastLastReceivedBid == null)
 			lastLastReceivedBid = lastReceivedBid;
-
+		/* Boulware Level is calculated by checking previous offers */
 		double lastLastReceivedUtility = utilitySpace.getUtility(lastLastReceivedBid);
 		double lastReceivedUtility = utilitySpace.getUtility(lastReceivedBid);
 		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility) / 2;
@@ -62,6 +70,8 @@ public class OpponentModel {
 	}
 
 	private void addPreference(Bid lastReceivedBid) {
+		/* Whenever a new offer is given, this method will be called
+		*  For each item, number of occurences will be stored in preferences list */
 		for (int issueNr = 1; issueNr <= numberOfIssues; issueNr++) {
 			Preference preference = new Preference();
 
@@ -87,6 +97,7 @@ public class OpponentModel {
 	}
 	
 	public List<Bid> getAcceptableBids() {
+		/* Return list of bids that will possibly be accepted by the opponent */
 		computeMostPreferredBid();
 		
 		List<Bid> acceptableBids = new ArrayList<Bid>();
@@ -132,6 +143,7 @@ public class OpponentModel {
 	}
 
 	private Weight[] getWeights() {
+		/* Estimate the weight of each issue */
 		Weight[] weights = new Weight[numberOfIssues + 1];
 
 		calculateWeights(weights);
@@ -177,6 +189,7 @@ public class OpponentModel {
 	}
 
 	private void addBidsWithDifferentValues(List<Bid> acceptableBids, Issue currentIssue) {
+		/* Modify the most preffered bid by opponent to increase utility for our agent */
 		int issueId = currentIssue.getNumber();
 		
 		List<Value> values = new ArrayList<Value>();

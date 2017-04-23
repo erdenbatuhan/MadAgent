@@ -9,6 +9,17 @@ import negotiator.utility.AbstractUtilitySpace;
 
 @SuppressWarnings("unused")
 public class Group5 extends AbstractNegotiationParty {
+    /* == CS462 Agent5 ==
+     * Agent uses several strategies to maximize its utility along with social welfare
+     * - Agent use some randomness to make it difficult for opponents to model itself.
+     * - Agent will accept offers that is above his threshold value.
+     * - Threshold will be updated by observing the opponent to react better.
+     * - Agent will offer relatively lower utilities for first timeToGetAlmostMad portion of negotiation
+     * - Agent will offer higher utilites after timeToGetAlmostMad portion to timeToGetMad portion of negotiation
+     * - When agent becomes mad, it will constantly offer the max utility bid.
+     * - In order to reach an agreement agent will model its opponents at last 5% and will offer more suitable bids for them
+     * - At final parts of negotiations if there is still no agreement, agent will offer the best bid that is given by opponent
+     * - Agent will offer the most preferred bid by opponent as last call to reach an agreement */
 
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;
 	/* -------------------------------- RISK FUNCTION  -------------------------------- */
@@ -51,7 +62,8 @@ public class Group5 extends AbstractNegotiationParty {
 
         negotiationType = dl.getType().toString();
         negotiationLimit = dl.getValue();
-        
+
+        /* This values will be used for adapting threshold */
         timeToGetMad = negotiationLimit * 0.8; // 80%
         timeToGetAlmostMad = timeToGetMad * 0.625; // 50%
 
@@ -63,13 +75,14 @@ public class Group5 extends AbstractNegotiationParty {
     public Action chooseAction(List<Class<? extends Action>> validActions) { // ... Your agent's turn ...
         numberOfRounds++;
 
-        if (lastReceivedBid == null) { // You are the starter party
+        if (lastReceivedBid == null) { // You are the starter party, offer the best possible bid
             return new Offer(getPartyId(), getBestBidPossible());
         } else { // You are not the starter party
             if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
 
-            /* If utility of the last received bid is higher than the threshold, accept the offer. Else, offer a new bid. */
+            /* If utility of the last received bid is higher than the threshold, accept the offer.
+               Else, offer a new bid. */
             if (utilitySpace.getUtility(lastReceivedBid) > threshold)
                 return new Accept(getPartyId(), lastReceivedBid);
             else
@@ -91,18 +104,24 @@ public class Group5 extends AbstractNegotiationParty {
         Bid bestBid = null;
 
         try {
+            /* If the negotiation is Round limited, use number of rounds as current Status */
             double currentStatus = numberOfRounds;
-            
+
+            /* If the negotiation is Time limited, use time as current status */
             if (negotiationType.equals("TIME"))
                 currentStatus = timeline.getTime() * timeline.getTotalTime();
-            
+
+            /* At first 40% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
             if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE == 0 && currentStatus <= negotiationLimit * 0.4) {
-            	bestBid = generateRandomBid(); // Faking
+            	bestBid = generateRandomBid();
             } else {
-            	if (currentStatus <= negotiationLimit * 0.1) { // Stay at 1 in the first 10% of the limit
+            	if (currentStatus <= negotiationLimit * 0.1) { // Agent offers 1 utility at first 10% of negotiation
                 	bestBid = utilitySpace.getMaxUtilityBid();
             	} else {
-            		bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
+            	    /* Agent generates a random offer with a utility that is above threshold value */
+            		bestBid = getBestBidWithThreshold(bestBid, currentStatus);
+            		/* Agent generates an offer to maximise agreement chance at final parts of negotiation
+            		   This method will return a bid only at specific situations, see method for more */
             		bestBid = getBestBidToAgree(bestBid, currentStatus);
             	}
             }
@@ -115,10 +134,11 @@ public class Group5 extends AbstractNegotiationParty {
 
 	private Bid getBestBidWithThreshold(Bid bestBid, double currentStatus) throws Exception {
 		Bid initialBid = null;
-		
+
+		/* Threshold value is updated according to the agent's boulware level */
         threshold = opponentModel.getNewThreshold();
         double innerThreshold = threshold * 0.975; // 97.5%
-        
+
 		if (currentStatus < timeToGetMad) {
 		    if (currentStatus < timeToGetAlmostMad)
 		        innerThreshold = threshold * 0.95; // 95%
@@ -141,7 +161,7 @@ public class Group5 extends AbstractNegotiationParty {
 	}
 
 	private Bid getBestBidToAgree(Bid bestBid, double currentStatus) throws Exception {
-		/* Initialize bids preferred by opponent after 95% */
+		/* Initialize bids preferred by opponent after 95% of negotiation */
 		if (currentStatus > negotiationLimit * 0.95 && bidsPreferredByOpponent == null)
 			initializeBidsPreferredByOpponent();
 
