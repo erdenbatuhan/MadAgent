@@ -5,8 +5,8 @@ import negotiator.utility.UtilitySpace;
 
 public class OpponentModel {
 
-	private static final double EDGE_OF_CONCEDING = 0.7;
 	private static final int MAXIMUM_BOULWARE_LEVEL = 5;
+	private static final int BOULWARE_MULTIPLIER = 10;
 
 	private class Preference {
 		private Issue issue;
@@ -41,6 +41,8 @@ public class OpponentModel {
 	}
 
 	public void decideBoulwareLevel(Bid lastReceivedBid) {
+		final double EDGE_OF_CONCEDING = threshold * 0.8;
+		
 		if (lastLastReceivedBid == null)
 			lastLastReceivedBid = lastReceivedBid;
 
@@ -49,12 +51,14 @@ public class OpponentModel {
 		double finalReceivedUtility = (lastLastReceivedUtility + lastReceivedUtility ) / 2;
 		
 		if (finalReceivedUtility > EDGE_OF_CONCEDING)
-			boulwareLevel = 0;
+			boulwareLevel = 0; // Conceder
 		else
-			boulwareLevel = (int) ((EDGE_OF_CONCEDING - finalReceivedUtility) * 10);
+			boulwareLevel = (int) ((EDGE_OF_CONCEDING - finalReceivedUtility) * BOULWARE_MULTIPLIER);
 		
 		if (boulwareLevel > MAXIMUM_BOULWARE_LEVEL)
 			boulwareLevel = MAXIMUM_BOULWARE_LEVEL;
+
+		lastLastReceivedBid = lastReceivedBid;
 	}
 
 	private void addPreference(Bid lastReceivedBid) {
@@ -113,8 +117,6 @@ public class OpponentModel {
 	public List<Bid> getAcceptableBids() {
 		List<Bid> acceptableBids = new ArrayList<Bid>();
 		Weight[] weights = getWeights();
-		
-		acceptableBids.add(mostPreferredBid);
 		
 		for (int i = 1; i <= 3; i++) {
 			Issue currentIssue = weights[i].issue;
@@ -201,5 +203,9 @@ public class OpponentModel {
 		System.out.println("New Threshold: " + threshold * (1 + boulwareLevel / c));
 		
 		return threshold * (1 + boulwareLevel / c);
+	}
+	
+	public Bid getMostPreferredBid() {
+		return mostPreferredBid;
 	}
 }

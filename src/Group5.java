@@ -20,8 +20,9 @@ public class Group5 extends AbstractNegotiationParty {
     private double numberOfRounds = 0;
     private double timeToGetAlmostMad = 0;
     private double timeToGetMad = 0;
-    private double threshold = 0.95;
+    private double threshold = 0.9;
     private int shiftBids = 0;
+    private List<Bid> bidsPreferredByOpponent = null;
 
     /* This will be called before the negotiation starts */
     /* initialize variables here */
@@ -57,7 +58,7 @@ public class Group5 extends AbstractNegotiationParty {
         numberOfRounds++;
 
         if (lastReceivedBid == null) { // If lastRecievedBid is null -> You are starter party, just generate an offer
-            return new Offer(getPartyId(), generateBid());
+            return new Offer(getPartyId(), getBestBidPossible());
         } else { // Else, Generate an offer
             if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
                 bestReceivedBid = lastReceivedBid;
@@ -66,7 +67,7 @@ public class Group5 extends AbstractNegotiationParty {
                 // If utility of the last received bid is higher than our threshold, Accept
                 return new Accept(getPartyId(), lastReceivedBid);
             } else { // Else, generate a new offer */
-                Offer newOffer = new Offer(getPartyId(), generateBid());
+                Offer newOffer = new Offer(getPartyId(), getBestBidPossible());
                 return new Offer(getPartyId(), newOffer.getBid());
             }
         }
@@ -85,56 +86,84 @@ public class Group5 extends AbstractNegotiationParty {
         }
     }
 
-    private Bid generateBid() {
-        Bid initialBid = null;
+    private Bid getBestBidPossible() {
         Bid bestBid = null;
 
         try {
-            threshold = opponentModel.getNewThreshold();
-            
-            double innerThreshold = threshold * 0.975; // 97.5%
             double currentStatus = numberOfRounds;
             
             if (negotiationType.equals("TIME"))
                 currentStatus = timeline.getTime() * timeline.getTotalTime();
             
-            if (currentStatus < timeToGetMad) {
-                if (currentStatus < timeToGetAlmostMad)
-                    innerThreshold = threshold * 0.95; // 95%
-
-                for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
-                    initialBid = generateRandomBid();
-
-                    if (utilitySpace.getUtility(initialBid) > innerThreshold)
-                        break;
-                }
-            	
-            	bestBid = initialBid;
-            } else { // You finally got mad!!
-                bestBid = utilitySpace.getMaxUtilityBid();
-            }
-
-            /* If deadline is approaching, offer using opponent model */
-            if (currentStatus > negotiationLimit * 0.975) {
-            	List<Bid> bidsPreferredByOpponent = opponentModel.getAcceptableBids();
-            	sortBids(bidsPreferredByOpponent);
-
-            	bestBid = bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size());
-            }
-            
-            /* Offer your best bid in every 10 rounds */
-            if (numberOfRounds % 10 == 0)
-                bestBid = utilitySpace.getMaxUtilityBid();
-            
-            /* Offer your best received bid as the negotiation is almost over */
-            if (currentStatus > negotiationLimit * 0.995)
-            	bestBid = bestReceivedBid;
+            bestBid = getBestBidWithThreshold(bestBid, currentStatus);   
+            bestBid = getBestBidToAgree(bestBid, currentStatus);
         } catch (Exception e) {
-            System.out.println("An exception thrown while generating bid");
+        	e.printStackTrace();
+            System.out.println("An exception thrown while generating bid..");
         }
 
         return bestBid;
     }
+
+	private Bid getBestBidWithThreshold(Bid bestBid, double currentStatus) throws Exception {
+		Bid initialBid = null;
+		
+        threshold = opponentModel.getNewThreshold();
+        double innerThreshold = threshold * 0.975; // 97.5%
+        
+		if (currentStatus < timeToGetMad) {
+		    if (currentStatus < timeToGetAlmostMad)
+		        innerThreshold = threshold * 0.95; // 95%
+
+		    for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
+		        initialBid = generateRandomBid();
+
+		        if (trial == MAXIMUM_NUMBER_OF_TRIALS)
+		        	initialBid = utilitySpace.getMaxUtilityBid();
+		        else if (utilitySpace.getUtility(initialBid) >= innerThreshold)
+		            break;
+		    }
+			
+			bestBid = initialBid;
+		} else { // You finally got mad!!
+		    bestBid = utilitySpace.getMaxUtilityBid();
+		}
+		
+		return bestBid;
+	}
+
+	private Bid getBestBidToAgree(Bid bestBid, double currentStatus) throws Exception {
+		/* Initialize bids preferred by opponent after 95% */
+		if (currentStatus > negotiationLimit * 0.95 && bidsPreferredByOpponent == null)
+			initializeBidsPreferredByOpponent();
+
+		/* If deadline is approaching, offer using opponent model */
+		if (currentStatus > negotiationLimit * 0.975)
+			bestBid = bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size());
+		
+		/* Offer your best bid in every 10 rounds */
+		if (numberOfRounds % 10 == 0)
+    		bestBid = utilitySpace.getMaxUtilityBid();
+		
+		/* Offer your best received bid as the negotiation is almost over */
+		if (currentStatus > negotiationLimit * 0.995)
+			bestBid = bestReceivedBid;
+		
+		/* Offer the most preferred bid by the opponent in order to reach an agreement */
+		if (currentStatus > negotiationLimit * 0.999)
+			bestBid = opponentModel.getMostPreferredBid();
+		
+		return bestBid;
+	}
+
+	private void initializeBidsPreferredByOpponent() throws Exception {
+		bidsPreferredByOpponent = opponentModel.getAcceptableBids();
+		sortBids(bidsPreferredByOpponent);
+		
+		/* There should be at least 2 elements in the array */
+		while (bidsPreferredByOpponent.size() <= 2)
+			bidsPreferredByOpponent.add(utilitySpace.getMaxUtilityBid());
+	}
     
     private void sortBids(List<Bid> bids) {
     	bids.sort(new Comparator<Bid>() {
