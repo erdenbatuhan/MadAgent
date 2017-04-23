@@ -76,9 +76,6 @@ public class OpponentModel {
 			else
 				preferences.get(index).count++;
 		}
-		
-		sortPreferences();
-		computeMostPreferredBid(lastReceivedBid);
 	}
 
 	private int getIndexIfPreferredBefore(Value value) {
@@ -88,33 +85,10 @@ public class OpponentModel {
 
 		return -1;
 	}
-
-	private void sortPreferences() {
-		preferences.sort(new Comparator<Preference>() {
-			@Override
-			public int compare(Preference a, Preference b) {
-				return b.count - a.count;
-			}
-		});
-	}
-	
-	private void computeMostPreferredBid(Bid lastReceivedBid) {
-		HashMap<Integer, Value> values = new HashMap<Integer, Value>();
-
-		for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
-			Issue currentIssue = preferences.get(i).issue;
-			Value currentValue = preferences.get(i).value;
-
-			if (!values.containsKey(currentIssue.getNumber())) {
-				values.put(currentIssue.getNumber(), currentValue);
-				j++;
-			}
-		}
-
-		mostPreferredBid = new Bid(utilitySpace.getDomain(), values);
-	}
 	
 	public List<Bid> getAcceptableBids() {
+		computeMostPreferredBid();
+		
 		List<Bid> acceptableBids = new ArrayList<Bid>();
 		Weight[] weights = getWeights();
 		
@@ -129,6 +103,32 @@ public class OpponentModel {
 		}
 		
 		return acceptableBids;
+	}
+	
+	public void computeMostPreferredBid() {
+		HashMap<Integer, Value> values = new HashMap<Integer, Value>();
+		sortPreferences();
+
+		for (int i = 0, j = 0; i < preferences.size() && j < numberOfIssues; i++) {
+			Issue currentIssue = preferences.get(i).issue;
+			Value currentValue = preferences.get(i).value;
+
+			if (!values.containsKey(currentIssue.getNumber())) {
+				values.put(currentIssue.getNumber(), currentValue);
+				j++;
+			}
+		}
+
+		mostPreferredBid = new Bid(utilitySpace.getDomain(), values);
+	}
+
+	private void sortPreferences() {
+		preferences.sort(new Comparator<Preference>() {
+			@Override
+			public int compare(Preference a, Preference b) {
+				return b.count - a.count;
+			}
+		});
 	}
 
 	private Weight[] getWeights() {

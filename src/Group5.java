@@ -159,8 +159,10 @@ public class Group5 extends AbstractNegotiationParty {
 			bestBid = bestReceivedBid;
 		
 		/* Offer the most preferred bid by the opponent in order to reach an agreement */
-		if (currentStatus > negotiationLimit * 0.999)
+		if (currentStatus > negotiationLimit * 0.999) {
+			opponentModel.computeMostPreferredBid();
 			bestBid = opponentModel.getMostPreferredBid();
+		}
 		
 		return bestBid;
 	}
