@@ -1,4 +1,5 @@
 import java.util.*;
+import list.Tuple;
 import negotiator.*;
 import negotiator.actions.*;
 import negotiator.boaframework.SortedOutcomeSpace;
@@ -48,6 +49,8 @@ public class Group5 extends AbstractNegotiationParty {
 	private double timeToGetMad = 0;
 	private double threshold = 0.95;
 	private int shiftBids = 0;
+	private boolean historyAnalyzed = false;
+	private StandardInfoList history;
 	private List<Bid> bidsPreferredByOpponent = null;
 
 	@Override
@@ -73,6 +76,46 @@ public class Group5 extends AbstractNegotiationParty {
 
 		if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
 			throw new IllegalStateException("need standard persistent data");
+		
+		// use history to get previous negotiation utilities
+		history = (StandardInfoList) getData().get();
+	}
+
+	@Override
+	public void receiveMessage(AgentID sender, Action action) { // ... Opponent's turn ...
+		super.receiveMessage(sender, action);
+
+		/* If the action is an Offer, get the last received bid and use it to form Opponent Model */
+		if (action instanceof Offer) {
+			lastReceivedBid = ((Offer) action).getBid(); 
+			opponentModel.offer(lastReceivedBid, numberOfRounds);
+		}
+		
+		if (!history.isEmpty() && !historyAnalyzed) {
+			analyzeHistory();
+		}
+	}
+	
+	private void analyzeHistory() {
+		historyAnalyzed = true;
+
+		System.out.println("History index: " + 1);
+		/* Compute for each party the maximum utility of the bids */
+		Map<String, Double> maxutils = new HashMap<String, Double>();
+		StandardInfo lastinfo = history.get(history.size() - 1);
+
+		for (Tuple<String, Double> offered : lastinfo.getUtilities()) {
+			String partyId = offered.get1();
+			double offerUtility = offered.get2();
+
+			System.out.println(lastinfo.getAgentProfiles().get("Group6@3"));
+
+			boolean isMax = false;
+			int counter = 0;
+
+			//System.out.println("PartyID: " +  partyId + " utilityForMe: " + offerUtility);
+			maxutils.put(partyId, maxutils.containsKey(partyId) ? Math.max(maxutils.get(partyId), offerUtility) : offerUtility);
+		}
 	}
 
 	@Override
@@ -91,17 +134,6 @@ public class Group5 extends AbstractNegotiationParty {
 				return new Accept(getPartyId(), lastReceivedBid);
 			else
 				return new Offer(getPartyId(), getBestBidPossible());
-		}
-	}
-
-	@Override
-	public void receiveMessage(AgentID sender, Action action) { // ... Opponent's turn ...
-		super.receiveMessage(sender, action);
-
-		/* If the action is an Offer, get the last received bid and use it to form Opponent Model */
-		if (action instanceof Offer) {
-			lastReceivedBid = ((Offer) action).getBid(); 
-			opponentModel.offer(lastReceivedBid, numberOfRounds);
 		}
 	}
 
