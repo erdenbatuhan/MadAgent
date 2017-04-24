@@ -10,7 +10,7 @@ import negotiator.utility.AbstractUtilitySpace;
 public class Group5 extends AbstractNegotiationParty {
 
 	/* ------------------------------------------------ Agent5 ------------------------------------------------
-	 * Agent Description: CS462 - Group5 Agent
+	 * Agent Description: CS462 - Agent5 - Agent of Group5
 	 * Agent uses several strategies to maximize its utility along with social welfare:
 	 * 	- Agent use some randomness to make it difficult for opponents to model itself.
 	 * 	- Agent will accept offers that is above his threshold value.
@@ -127,7 +127,13 @@ public class Group5 extends AbstractNegotiationParty {
 				}
 			} else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
 				/* At first 90% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
-				bestBid = generateRandomBid();
+				for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
+					bestBid = generateRandomBid();
+					
+					/* The utility of the best bid should be greater than 80% of the threshold */
+					if (utilitySpace.getUtility(bestBid) >= threshold * 0.8)
+						break;
+				}
 			} else {
 				/* Agent generates a random offer with a utility that is above threshold value */
 				bestBid = getBestBidWithThreshold(bestBid, currentStatus);
@@ -218,7 +224,7 @@ public class Group5 extends AbstractNegotiationParty {
 
 	@Override
 	public String getDescription() {
-		return "CS462 - Group5 Agent";
+		return "CS462 - Agent5 - Agent of Group5";
 	}
 
 	@Override

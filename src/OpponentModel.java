@@ -1,4 +1,4 @@
-/* Opponent Model of CS462 - Group5 Agent */
+/* Opponent Model of Agent5 (CS462 - Agent of Group5) */
 
 import java.util.*;
 import negotiator.*;

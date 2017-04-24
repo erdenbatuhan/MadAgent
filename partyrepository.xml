@@ -3,10 +3,25 @@
     <items>
         <agentRepItems/>
         <partyRepItems>
+            <partyRepItem classPath="./bin/Group5.class">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="./test/agents/Group6/Group6.class">
+                <properties/>
+            </partyRepItem>
             <partyRepItem classPath="negotiator.parties.BoulwareNegotiationParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.ConcederNegotiationParty">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.fairy.kawaii">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.CounterOfferHumanNegotiationParty">
@@ -24,16 +39,10 @@
             <partyRepItem classPath="agents.anac.y2015.cuhkagent2015.CUHKAgent2015">
                 <properties/>
             </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
-                <properties/>
-            </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.AresParty.AresParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.Mercury.Mercury">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.agenth.AgentH">
@@ -49,9 +58,6 @@
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.DrageKnight.DrageKnight">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.fairy.kawaii">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.agentBuyogV2.AgentBuyogMain">
