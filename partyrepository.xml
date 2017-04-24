@@ -315,9 +315,6 @@
             <partyRepItem classPath="negotiator.parties.FeedbackHillClimber">
                 <properties/>
             </partyRepItem>
-            <partyRepItem classPath="./bin/Group5.class">
-                <properties/>
-            </partyRepItem>
         </partyRepItems>
         <domainRepItem/>
         <protocolRepItem/>
