@@ -54,10 +54,6 @@ public class Group5 extends AbstractNegotiationParty {
 	public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
 			PersistentDataContainer data) {
 		super.init(utilSpace, dl, tl, randomSeed, agentId, data);
-		
-		// TODO:
-		// utilitySpace.setDiscount(0.80D);
-		// utilitySpace.setReservationValue(0.95D);
 
 		opponentModel = new OpponentModel(utilitySpace, threshold);
 		sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
