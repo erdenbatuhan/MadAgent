@@ -17,7 +17,7 @@ public class Group5 extends AbstractNegotiationParty {
 	 * 	- Threshold will be updated by observing the opponent to react better.
 	 * 	- Agent will offer relatively lower utilities for first timeToGetAlmostMad portion of negotiation.
 	 * 	- Agent will offer higher utilities after timeToGetAlmostMad portion to timeToGetMad portion of negotiation.
-	 * 	- When agent becomes mad, it will constantly offer the max utility bid.
+	 * 	- When agent becomes mad, it will offer bids that have higher utilities than the very first threshold value.
 	 * 	- In order to reach an agreement agent will model its opponents at last 5% and will offer more suitable bids for them.
 	 * 	- At final parts of negotiations if there is still no agreement, agent will offer the best bid that is given by opponent.
 	 * 	- Agent will offer the most preferred bid by opponent as last call to reach an agreement. 
@@ -40,6 +40,7 @@ public class Group5 extends AbstractNegotiationParty {
 	private SortedOutcomeSpace sortedOutcomeSpace = null;
 	private Bid lastReceivedBid = null;
 	private Bid bestReceivedBid = null;
+	private Bid secondBestBid = null;
 	private String negotiationType = null;
 	private double negotiationLimit = 0;
 	private double numberOfRounds = 0;
@@ -72,6 +73,22 @@ public class Group5 extends AbstractNegotiationParty {
 
 		if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
 			throw new IllegalStateException("need standard persistent data");
+		
+		/* Agent calculates the second best bid */
+		try {
+			calculateSecondBestBid();
+		} catch (Exception e) {
+			System.out.println("An exception thrown while calculating the second best bid..");
+		}
+	}
+	
+	private void calculateSecondBestBid() throws Exception {
+		for (double u = utilitySpace.getUtility(utilitySpace.getMaxUtilityBid()); true; u -= 0.01) {
+			secondBestBid = sortedOutcomeSpace.getBidNearUtility(u).getBid();
+			
+			if (utilitySpace.getUtility(secondBestBid) != utilitySpace.getUtility(utilitySpace.getMaxUtilityBid()))
+				break;
+		}
 	}
 
 	@Override
@@ -116,15 +133,8 @@ public class Group5 extends AbstractNegotiationParty {
 				currentStatus = timeline.getTime() * timeline.getTotalTime();
 
 			if (currentStatus <= negotiationLimit * 0.05) {
-				/* Agent offers a bid near threshold at first 5% of negotiation */
-				bestBid = sortedOutcomeSpace.getBidNearUtility(threshold).getBid();
-
-				for (double t = threshold; true; t -= 0.01) {
-					if (utilitySpace.getUtility(bestBid) != utilitySpace.getUtility(utilitySpace.getMaxUtilityBid()))
-						break;
-
-					bestBid = sortedOutcomeSpace.getBidNearUtility(t).getBid();
-				}
+				/* Agent offers the second best bid at first 5% of the negotiation */
+				bestBid = secondBestBid;
 			} else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
 				/* At first 90% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
 				for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
@@ -137,7 +147,7 @@ public class Group5 extends AbstractNegotiationParty {
 			} else {
 				/* Agent generates a random offer with a utility that is above threshold value */
 				bestBid = getBestBidWithThreshold(bestBid, currentStatus);
-				/* Agent generates an offer to maximize agreement chance at final parts of negotiation */
+				/* Agent generates an offer to maximize agreement chance at final parts of the negotiation */
 				bestBid = getBestBidToAgree(bestBid, currentStatus);
 			}
 		} catch (Exception e) {
@@ -148,55 +158,54 @@ public class Group5 extends AbstractNegotiationParty {
 	}
 
 	private Bid getBestBidWithThreshold(Bid bestBid, double currentStatus) throws Exception {
-		Bid initialBid = null;
-
 		/* Threshold value is updated according to the agent's boulware level */
 		threshold = opponentModel.getNewThreshold();
-		double innerThreshold = threshold * 0.975; // 97.5% of the threshold
+		double innerThreshold = threshold;
 
 		if (currentStatus < timeToGetMad) {
+			innerThreshold = threshold * 0.975; // 97.5% of the threshold
+					
 			if (currentStatus < timeToGetAlmostMad)
 				innerThreshold = threshold * 0.95; // 95% of the threshold
+		}
+		
+		/* Offer a bid (which has a higher utility than the very first threshold value) in every 10 rounds */
+		if (numberOfRounds % 10 == 0)
+			innerThreshold = threshold;
 
-			for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
-				initialBid = generateRandomBid();
+		for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
+			bestBid = generateRandomBid();
 
-				if (trial == MAXIMUM_NUMBER_OF_TRIALS)
-					initialBid = utilitySpace.getMaxUtilityBid();
-				else if (utilitySpace.getUtility(initialBid) >= innerThreshold)
-					break;
-			}
-
-			bestBid = initialBid;
-		} else { // You finally got mad!!
-			bestBid = utilitySpace.getMaxUtilityBid();
+			if (trial == MAXIMUM_NUMBER_OF_TRIALS)
+				bestBid = utilitySpace.getMaxUtilityBid();
+			else if (utilitySpace.getUtility(bestBid) >= innerThreshold)
+				break;
 		}
 
 		return bestBid;
 	}
 
 	private Bid getBestBidToAgree(Bid bestBid, double currentStatus) throws Exception {
-		/* Initialize bids preferred by opponent after 95% of negotiation */
-		if (currentStatus > negotiationLimit * 0.95 && bidsPreferredByOpponent == null)
+		/* Initialize bids preferred by opponent after 95% of the negotiation */
+		if (currentStatus > negotiationLimit * 0.95 && bidsPreferredByOpponent == null) {
+			opponentModel.computeMostPreferredBid();
 			initializeBidsPreferredByOpponent();
+		}
 
 		/* If deadline is approaching, offer using opponent model */
-		if (currentStatus > negotiationLimit * 0.975)
+		if (currentStatus > negotiationLimit * 0.975) {
 			bestBid = bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size());
-
-		/* Offer your best bid in every 10 rounds */
-		if (numberOfRounds % 10 == 0)
-			bestBid = utilitySpace.getMaxUtilityBid();
-
-		/* Offer your best received bid as the negotiation is almost over */
-		if (currentStatus > negotiationLimit * 0.995)
-			bestBid = bestReceivedBid;
+			
+			/* Offer your best received bid if its utility is greater */
+			if (utilitySpace.getUtility(bestReceivedBid) > utilitySpace.getUtility(bestBid)) {
+				bestBid = bestReceivedBid;
+				shiftBids = 0;
+			}
+		}
 
 		/* Offer the most preferred bid by the opponent in order to reach an agreement */
-		if (currentStatus > negotiationLimit * 0.999) {
-			opponentModel.computeMostPreferredBid();
+		if (currentStatus > negotiationLimit * 0.999)
 			bestBid = opponentModel.getMostPreferredBid();
-		}
 
 		return bestBid;
 	}
@@ -207,7 +216,7 @@ public class Group5 extends AbstractNegotiationParty {
 
 		/* There should be at least 2 elements in the array */
 		while (bidsPreferredByOpponent.size() <= 2)
-			bidsPreferredByOpponent.add(utilitySpace.getMaxUtilityBid());
+			bidsPreferredByOpponent.add(bestReceivedBid);
 	}
 
 	private void sortBids(List<Bid> bids) {
