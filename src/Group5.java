@@ -199,11 +199,13 @@ public class Group5 extends AbstractNegotiationParty {
 		/* If deadline is approaching, offer using opponent model */
 		if (currentStatus > negotiationLimit * 0.975) {
 			bestBid = bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size());
-			
-			/* Offer your best received bid if its utility is greater */
-			if (utilitySpace.getUtility(bestReceivedBid) > utilitySpace.getUtility(bestBid)) {
-				bestBid = bestReceivedBid;
-				shiftBids = 0;
+
+			/* Between 97.50% and 98.75%, offer your best received bid if its utility is greater */
+			if (currentStatus < negotiationLimit * 0.9875) {
+				if (utilitySpace.getUtility(bestReceivedBid) > utilitySpace.getUtility(bestBid)) {
+					bestBid = bestReceivedBid;
+					shiftBids = 0;
+				}
 			}
 		}
 
