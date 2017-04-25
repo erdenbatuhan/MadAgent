@@ -23,8 +23,7 @@ public class Group5 extends AbstractNegotiationParty {
 	 * 	- Agent will offer the most preferred bid by opponent as last call to reach an agreement. 
 	 * */
 
-	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;
-	
+	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;	
 
 	/* -------------------------------- RISK FUNCTION  --------------------------------
 	 * f <- Round number to fake (Agent will fake in every f rounds)
