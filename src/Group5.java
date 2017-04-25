@@ -111,6 +111,10 @@ public class Group5 extends AbstractNegotiationParty {
 		} else { // You are not the starter party
 			if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
 				bestReceivedBid = lastReceivedBid;
+			
+			/* TODO: Instead of keeping the best received bid, keep top 10 received bids,
+			 *		 because the opponent can change his acceptance strategy.
+			 * */
 
 			/* If utility of the last received bid is higher than the threshold, accept the offer. */
 			/* Else, offer a new bid. */
