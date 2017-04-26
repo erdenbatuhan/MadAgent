@@ -43,13 +43,13 @@ public class OpponentModel {
 	}
 
 	/* -------------------------- The concept of Boulware Level --------------------------
-	 * 	- boulware level is used for modifying the behavior of our agent.
+	 * 	- Boulware level is used for modifying the behavior of our agent.
 	 * 	- If the boulware level is high, agent will increase threshold and will become more boulware.
 	 * 	- The boulware level is decided by checking the offers of the opponent.
 	 * 	- If the utilities of offers that is given by the opponent are low, according to our utility function,
 	 *    the boulware level will be high.
-	 * 	- boulware level is calculated by checking the previous offers.
-	 * 	- last last received bid is the bid received just before the last received bid.
+	 * 	- Boulware level is calculated by checking the previous offers.
+	 * 	- Last last received bid is the bid received just before the last received bid.
 	 * */
 	public void decideBoulwareLevel(Bid lastReceivedBid) {
 		final double EDGE_OF_CONCEDING = threshold * 0.8;
