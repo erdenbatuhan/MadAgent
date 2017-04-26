@@ -244,7 +244,7 @@ public class Group5 extends AbstractNegotiationParty {
 	}
 
 	private Bid getBidUsingOpponentModeling(double currentStatus) throws Exception {
-		Bid bid = bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size());
+		Bid bid = (bidsPreferredByOpponent != null) ? bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size()) : bestReceivedBid;
 
 		if (currentStatus < negotiationLimit * 0.9875) { // Between last 2.5% and 1.25% of the negotiation
 			/* Offer your best received bid if its utility is greater */
