@@ -42,7 +42,7 @@ public class OpponentModel {
 		addPreference(lastReceivedBid);
 	}
 
-	/* -------------------------- The concept of Boulware Level --------------------------
+	/* -------------------------- The Concept of Boulware Level --------------------------
 	 * 	- Boulware level is used for modifying the behavior of our agent.
 	 * 	- If the boulware level is high, agent will increase threshold and will become more boulware.
 	 * 	- The boulware level is decided by checking the offers of the opponent.
@@ -176,7 +176,7 @@ public class OpponentModel {
 			}
 		}
 
-		for (int i = 1; i < weights.length; i++)
+		for (int i = 1; i < weights.length; i++) // Normalizing the weights
 			weights[i].value /= sum;
 	}
 
