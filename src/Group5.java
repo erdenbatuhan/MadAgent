@@ -123,26 +123,23 @@ public class Group5 extends AbstractNegotiationParty {
 	}
 
 	private Bid getBestBidPossible() {
-		Bid bestBid = null;
-
 		try {
 			double currentStatus = getCurrentStatus();
 
-			if (currentStatus <= negotiationLimit * 0.05) { // First 5% of the negotiation
-				bestBid = secondBestBid;
-			} else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
-				bestBid = getFakeBid();
-			} else {
+			if (currentStatus <= negotiationLimit * 0.05) // First 5% of the negotiation
+				return secondBestBid;
+			else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9)
+				return getFakeBid();
+			else
 				if (currentStatus < negotiationLimit * 0.975)
-					bestBid = getBestBidWithThreshold(currentStatus);
+					return getBestBidWithThreshold(currentStatus);
 				else  // Last 2.5% of the negotiation
-					bestBid = getBestBidToAgree(currentStatus);
-			}
+					return getBestBidToAgree(currentStatus);
 		} catch (Exception e) {
 			System.out.println("An exception thrown while generating bid..");
 		}
-
-		return bestBid;
+		
+		return generateRandomBid(); // This line will never be executed!!
 	}
 
 	/* Current status is the time/number of rounds passed */
