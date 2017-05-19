@@ -3,25 +3,10 @@
     <items>
         <agentRepItems/>
         <partyRepItems>
-            <partyRepItem classPath="./bin/Group5.class">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="./test/agents/Group6/Group6.class">
-                <properties/>
-            </partyRepItem>
             <partyRepItem classPath="negotiator.parties.BoulwareNegotiationParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.ConcederNegotiationParty">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.fairy.kawaii">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.CounterOfferHumanNegotiationParty">
@@ -33,16 +18,70 @@
             <partyRepItem classPath="negotiator.parties.RandomCounterOfferNegotiationParty">
                 <properties/>
             </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.agenthp2.AgentHP2_main">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.agentlight.AgentLight">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.atlas3.Atlas3">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.caduceus.Caduceus">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.clockworkagent.ClockworkAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.farma.Farma">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.grandma.GrandmaAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.maxoops.MaxOops">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.myagent.MyAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.ngent.Ngent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.pars2.ParsAgent2">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.parscat.ParsCat">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.syagent.SYAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.terra.Terra">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.yxagent.YXAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2016.agentsmith.AgentSmith">
+                <properties/>
+            </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.Phoenix.PhoenixParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.cuhkagent2015.CUHKAgent2015">
                 <properties/>
             </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
+                <properties/>
+            </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.AresParty.AresParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.Mercury.Mercury">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.agenth.AgentH">
@@ -58,6 +97,9 @@
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.DrageKnight.DrageKnight">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.fairy.kawaii">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.agentBuyogV2.AgentBuyogMain">
@@ -319,6 +361,9 @@
                 </properties>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.FeedbackHillClimber">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="C:\Users\Ekrem\OneDrive\ÖZÜ\CS 462 - Çok Etmenli Sistemlerde Ortak Karar Alma\CS462_AgentProject\bin\Group5.class">
                 <properties/>
             </partyRepItem>
         </partyRepItems>

@@ -9,6 +9,7 @@ import negotiator.actions.Accept;
 import negotiator.actions.Action;
 import negotiator.actions.Offer;
 import negotiator.parties.AbstractNegotiationParty;
+import negotiator.parties.NegotiationInfo;
 import negotiator.persistent.PersistentDataContainer;
 import negotiator.utility.AbstractUtilitySpace;
 
@@ -20,13 +21,12 @@ public class Groupn extends AbstractNegotiationParty {
 	private Bid lastReceivedBid = null;
 
 	@Override
-	public void init(AbstractUtilitySpace utilSpace, Deadline dl, negotiator.timeline.TimeLineInfo tl, long randomSeed,
-			AgentID agentId, PersistentDataContainer storage) {
+	public void init(NegotiationInfo info) {
 
-		super.init(utilSpace, dl, tl, randomSeed, agentId, storage);
+		super.init(info);
 
-		System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
-		System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
+		System.out.println("Discount Factor is " + info.getUtilitySpace().getDiscountFactor());
+		System.out.println("Reservation Value is " + info.getUtilitySpace().getReservationValueUndiscounted());
 
 		// if you need to initialize some variables, please initialize them
 		// below

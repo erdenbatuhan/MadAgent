@@ -3,6 +3,7 @@ import negotiator.*;
 import negotiator.actions.*;
 import negotiator.boaframework.SortedOutcomeSpace;
 import negotiator.parties.AbstractNegotiationParty;
+import negotiator.parties.NegotiationInfo;
 import negotiator.persistent.*;
 import negotiator.timeline.TimeLineInfo;
 import negotiator.utility.AbstractUtilitySpace;
@@ -52,22 +53,11 @@ public class Group5 extends AbstractNegotiationParty {
 	private List<Bid> bidsPreferredByOpponent = null;
 
 	@Override
-	public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
-			PersistentDataContainer data) {
-		super.init(utilSpace, dl, tl, randomSeed, agentId, data);
+	public void init(NegotiationInfo info) {
+		super.init(info);
 
 		opponentModel = new OpponentModel(utilitySpace, threshold);
 		sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
-
-		try {
-			bestReceivedBid = utilSpace.getMinUtilityBid();
-			worstReceivedBid = utilSpace.getMaxUtilityBid();
-		} catch (Exception e) {
-			System.out.println("An exception thrown at init..");
-		}
-
-		negotiationType = dl.getType().toString();
-		negotiationLimit = dl.getValue();
 
 		/* This values will be used for adapting threshold */
 		timeToGetMad = negotiationLimit * 0.8; // Agent gets mad in the last 20% of the negotiation

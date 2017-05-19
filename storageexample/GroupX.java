@@ -12,6 +12,7 @@ import negotiator.actions.Accept;
 import negotiator.actions.Action;
 import negotiator.actions.Offer;
 import negotiator.parties.AbstractNegotiationParty;
+import negotiator.parties.NegotiationInfo;
 import negotiator.persistent.PersistentDataContainer;
 import negotiator.persistent.PersistentDataType;
 import negotiator.persistent.StandardInfo;
@@ -30,13 +31,12 @@ public class GroupX extends AbstractNegotiationParty {
 	private StandardInfoList history;
 
 	@Override
-	public void init(AbstractUtilitySpace utilSpace, Deadline dl, TimeLineInfo tl, long randomSeed, AgentID agentId,
-			PersistentDataContainer data) {
+	public void init(NegotiationInfo info) {
 
-		super.init(utilSpace, dl, tl, randomSeed, agentId, data);
+		super.init(info);
 
-		System.out.println("Discount Factor is " + utilSpace.getDiscountFactor());
-		System.out.println("Reservation Value is " + utilSpace.getReservationValueUndiscounted());
+		System.out.println("Discount Factor is " + info.getUtilitySpace().getDiscountFactor());
+		System.out.println("Reservation Value is " + info.getUtilitySpace().getReservationValueUndiscounted());
 
 		if (getData().getPersistentDataType() != PersistentDataType.STANDARD) {
 			throw new IllegalStateException("need standard persistent data");
