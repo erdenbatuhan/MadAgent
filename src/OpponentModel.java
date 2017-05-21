@@ -215,7 +215,7 @@ public class OpponentModel {
 	}
 
 	public double getNewThreshold() {
-		/* c is the constant value which makes threshold 1 if the boulware level is maximum (5)*/
+		/* c is the constant value which makes threshold 1 if the boulware level is maximum (5) */
 		final double c = (threshold * MAXIMUM_BOULWARE_LEVEL) / (1 - threshold);
 		return threshold * (1 + boulwareLevel / c);
 	}

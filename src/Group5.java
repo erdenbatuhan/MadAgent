@@ -55,9 +55,22 @@ public class Group5 extends AbstractNegotiationParty {
 	@Override
 	public void init(NegotiationInfo info) {
 		super.init(info);
+		
+		System.out.println("Discount Factor is " + info.getUtilitySpace().getDiscountFactor());
+		System.out.println("Reservation Value is " + info.getUtilitySpace().getReservationValueUndiscounted());
 
 		opponentModel = new OpponentModel(utilitySpace, threshold);
 		sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
+		
+		try {
+			bestReceivedBid = utilitySpace.getMinUtilityBid();
+			worstReceivedBid = utilitySpace.getMaxUtilityBid();
+		} catch (Exception e) {
+			System.err.println("An exception thrown at init..");
+		}
+		
+		negotiationType = info.getDeadline().getType().toString();
+		negotiationLimit = info.getDeadline().getValue();
 
 		/* This values will be used for adapting threshold */
 		timeToGetMad = negotiationLimit * 0.8; // Agent gets mad in the last 20% of the negotiation
@@ -70,7 +83,7 @@ public class Group5 extends AbstractNegotiationParty {
 		try {
 			calculateSecondBestBid();
 		} catch (Exception e) {
-			System.out.println("An exception thrown while calculating the second best bid..");
+			System.err.println("An exception thrown while calculating the second best bid..");
 		}
 	}
 	
@@ -125,7 +138,7 @@ public class Group5 extends AbstractNegotiationParty {
 	private Bid getBestBidPossible() {
 		try {
 			double currentStatus = getCurrentStatus();
-
+			
 			if (currentStatus <= negotiationLimit * 0.05) // First 5% of the negotiation
 				return secondBestBid;
 			else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9)
@@ -136,7 +149,7 @@ public class Group5 extends AbstractNegotiationParty {
 				else  // Last 2.5% of the negotiation
 					return getBestBidToAgree(currentStatus);
 		} catch (Exception e) {
-			System.out.println("An exception thrown while generating bid..");
+			System.err.println("An exception thrown while generating bid..");
 		}
 		
 		return generateRandomBid(); // This line will never be executed!!

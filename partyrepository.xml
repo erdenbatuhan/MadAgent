@@ -3,6 +3,9 @@
     <items>
         <agentRepItems/>
         <partyRepItems>
+            <partyRepItem classPath="/Users/batuhan/Documents/Eclipse Workspace/CS462_AgentProject/bin/Group5.class">
+                <properties/>
+            </partyRepItem>
             <partyRepItem classPath="negotiator.parties.BoulwareNegotiationParty">
                 <properties/>
             </partyRepItem>
@@ -361,9 +364,6 @@
                 </properties>
             </partyRepItem>
             <partyRepItem classPath="negotiator.parties.FeedbackHillClimber">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="C:\Users\Ekrem\OneDrive\ÖZÜ\CS 462 - Çok Etmenli Sistemlerde Ortak Karar Alma\CS462_AgentProject\bin\Group5.class">
                 <properties/>
             </partyRepItem>
         </partyRepItems>
