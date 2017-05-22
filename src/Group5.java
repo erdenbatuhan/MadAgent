@@ -5,8 +5,6 @@ import negotiator.boaframework.SortedOutcomeSpace;
 import negotiator.parties.AbstractNegotiationParty;
 import negotiator.parties.NegotiationInfo;
 import negotiator.persistent.*;
-import negotiator.timeline.TimeLineInfo;
-import negotiator.utility.AbstractUtilitySpace;
 
 public class Group5 extends AbstractNegotiationParty {
 
@@ -24,6 +22,7 @@ public class Group5 extends AbstractNegotiationParty {
 	 * 	- Agent will offer the most preferred bid by opponent as last call to reach an agreement. 
 	 * */
 
+	private static final Random RANDOM = new Random();
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;	
 
 	/* -------------------------------- RISK FUNCTION  --------------------------------
@@ -37,20 +36,23 @@ public class Group5 extends AbstractNegotiationParty {
 	private static final double RISK_PARAMETER = 5; // Risk Parameter: 0, 1, 2, ..., 8, 9, 10
 	private static final int ROUND_NUMBER_TO_FAKE = (int) (RISK_CONSTANT / Math.pow(2, RISK_PARAMETER));
 
-	private OpponentModel opponentModel = null;
 	private SortedOutcomeSpace sortedOutcomeSpace = null;
 	private Bid lastReceivedBid = null;
 	private Bid bestReceivedBid = null;
-	private Bid worstReceivedBid = null;
 	private Bid secondBestBid = null;
 	private String negotiationType = null;
 	private double negotiationLimit = 0;
-	private double numberOfRounds = 0;
+	private double numberOfRoundsPassed = 0;
 	private double timeToGetAlmostMad = 0;
 	private double timeToGetMad = 0;
-	private double threshold = 0.95;
-	private int shiftBids = 0;
-	private List<Bid> bidsPreferredByOpponent = null;
+	private double threshold = 0.8;
+	private double currentThreshold = 0.8;
+	/* Variables for Opponent Modeling */
+	private int opponentTurn = 0;
+	private int myTurn = 0;
+	private int shiftBids[] = null;	
+	private OpponentModel[] opponentModels = null;
+	private List<List<Bid>> bidsPreferredByOpponents = null;
 
 	@Override
 	public void init(NegotiationInfo info) {
@@ -59,12 +61,20 @@ public class Group5 extends AbstractNegotiationParty {
 		System.out.println("Discount Factor is " + info.getUtilitySpace().getDiscountFactor());
 		System.out.println("Reservation Value is " + info.getUtilitySpace().getReservationValueUndiscounted());
 
-		opponentModel = new OpponentModel(utilitySpace, threshold);
-		sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);
+		sortedOutcomeSpace = new SortedOutcomeSpace(utilitySpace);	
+		threshold *= 1.125;
+		
+		shiftBids = new int[3];
+		opponentModels = new OpponentModel[3];
+		bidsPreferredByOpponents = new ArrayList<List<Bid>>();
+		
+		for (int i = 0; i < 3; i++) {
+			opponentModels[i] = new OpponentModel(utilitySpace, threshold);
+			bidsPreferredByOpponents.add(null);
+		}
 		
 		try {
 			bestReceivedBid = utilitySpace.getMinUtilityBid();
-			worstReceivedBid = utilitySpace.getMaxUtilityBid();
 		} catch (Exception e) {
 			System.err.println("An exception thrown at init..");
 		}
@@ -74,7 +84,7 @@ public class Group5 extends AbstractNegotiationParty {
 
 		/* This values will be used for adapting threshold */
 		timeToGetMad = negotiationLimit * 0.8; // Agent gets mad in the last 20% of the negotiation
-		timeToGetAlmostMad = timeToGetMad * 0.625; // Agent gets almost mad in the last 50% of the negotiation
+		timeToGetAlmostMad = negotiationLimit * 0.5; // Agent gets almost mad in the last 50% of the negotiation
 
 		if (getData().getPersistentDataType() != PersistentDataType.STANDARD)
 			throw new IllegalStateException("need standard persistent data");
@@ -103,13 +113,15 @@ public class Group5 extends AbstractNegotiationParty {
 		/* If the action is an Offer, get the last received bid and use it to form Opponent Model */
 		if (action instanceof Offer) {
 			lastReceivedBid = ((Offer) action).getBid(); 
-			opponentModel.offer(lastReceivedBid, numberOfRounds);
+			
+			opponentModels[2].offer(lastReceivedBid, numberOfRoundsPassed);
+			opponentModels[opponentTurn++ % 2].offer(lastReceivedBid, numberOfRoundsPassed);
 		}
 	}
 
 	@Override
 	public Action chooseAction(List<Class<? extends Action>> validActions) { // ... Your agent's turn ...
-		numberOfRounds++;
+		numberOfRoundsPassed++;
 
 		if (lastReceivedBid == null) { // You are the starter party, offer the best possible bid
 			return new Offer(getPartyId(), getBestBidPossible());
@@ -118,17 +130,9 @@ public class Group5 extends AbstractNegotiationParty {
 			if (utilitySpace.getUtility(lastReceivedBid) > utilitySpace.getUtility(bestReceivedBid))
 				bestReceivedBid = lastReceivedBid;
 
-			/* Determine the worst received bid */
-			if (utilitySpace.getUtility(lastReceivedBid) < utilitySpace.getUtility(worstReceivedBid))
-				worstReceivedBid = lastReceivedBid;
-			
-			/* TODO: Instead of keeping the best received bid, keep top 10 received bids,
-			 *		 because the opponent can change his acceptance strategy.
-			 * */
-
 			/* If utility of the last received bid is higher than the threshold, accept the offer. */
 			/* Else, offer a new bid. */
-			if (utilitySpace.getUtility(lastReceivedBid) > threshold)
+			if (utilitySpace.getUtility(lastReceivedBid) > currentThreshold)
 				return new Accept(getPartyId(), lastReceivedBid);
 			else
 				return new Offer(getPartyId(), getBestBidPossible());
@@ -139,15 +143,19 @@ public class Group5 extends AbstractNegotiationParty {
 		try {
 			double currentStatus = getCurrentStatus();
 			
-			if (currentStatus <= negotiationLimit * 0.05) // First 5% of the negotiation
+			if (currentStatus <= negotiationLimit * 0.05) { // First 5% of the negotiation
 				return secondBestBid;
-			else if ((int) numberOfRounds % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9)
+			} else if ((int) numberOfRoundsPassed % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
 				return getFakeBid();
-			else
-				if (currentStatus < negotiationLimit * 0.975)
-					return getBestBidWithThreshold(currentStatus);
-				else  // Last 2.5% of the negotiation
-					return getBestBidToAgree(currentStatus);
+			} else {
+				myTurn = RANDOM.nextInt(3);
+				calculateCurrentThreshold(currentStatus);
+				
+				if (currentStatus > negotiationLimit * 0.99 && utilitySpace.getUtility(bestReceivedBid) >= currentThreshold)
+					return bestReceivedBid;
+				else
+					return getNiceBid(currentStatus);
+			}
 		} catch (Exception e) {
 			System.err.println("An exception thrown while generating bid..");
 		}
@@ -162,7 +170,7 @@ public class Group5 extends AbstractNegotiationParty {
 			return timeline.getTime() * timeline.getTotalTime();
 		
 		/* If the negotiation is round limited, use number of rounds as current status */
-		return numberOfRounds;
+		return numberOfRoundsPassed;
 	}
 
 	/* At first 90% of negotiation, agent generates a random bid to fake his opponent with certain frequency */
@@ -177,58 +185,58 @@ public class Group5 extends AbstractNegotiationParty {
 		
 		return generateRandomBid();
 	}
+	
+	private void calculateCurrentThreshold(double currentStatus) {
+		/* Threshold value is updated according to the agent's boulware level */
+		threshold = opponentModels[myTurn].getNewThreshold();
+		
+		if (numberOfRoundsPassed % 10 == 0) {
+			currentThreshold = threshold;
+		} else if (currentStatus > timeToGetAlmostMad) {
+			currentThreshold = threshold * 0.95;
+			
+			if (currentStatus > timeToGetMad)
+				currentThreshold = threshold * 0.9;
+		}
+	}
 
-	/* Agent generates a random offer with a utility that is above threshold value */
-	private Bid getBestBidWithThreshold(double currentStatus) throws Exception {
-		double innerThreshold = getInnerThreshold(currentStatus);
-
+	/* Get a nice bid using Inner Threshold and Opponent Model */
+	private Bid getNiceBid(double currentStatus) throws Exception {
+		Bid bid = generateRandomBid();
+		
+		if (currentStatus > timeToGetAlmostMad) {
+			getBidsPreferredByOpponent();		
+			bid = (bidsPreferredByOpponents.get(myTurn) != null) ? 
+					bidsPreferredByOpponents.get(myTurn).get(shiftBids[myTurn]++ % bidsPreferredByOpponents.get(myTurn).size()) : 
+						utilitySpace.getMaxUtilityBid();
+		
+			if (utilitySpace.getUtility(bid) >= currentThreshold)
+				return bid;
+			else
+				shiftBids[myTurn] = 0;
+		}
+		
 		for (int trial = 1; trial <= MAXIMUM_NUMBER_OF_TRIALS; trial++) {
-			Bid bid = generateRandomBid();
+			bid = generateRandomBid();
 
-			if (utilitySpace.getUtility(bid) >= innerThreshold)
+			if (utilitySpace.getUtility(bid) >= currentThreshold)
 				return bid;
 		}
 		
 		return utilitySpace.getMaxUtilityBid();
 	}
 	
-	private double getInnerThreshold(double currentStatus) {
-		/* Threshold value is updated according to the agent's boulware level */
-		threshold = opponentModel.getNewThreshold();
-
-		/* In every 10 rounds, inner threshold remains unchanged */
-		if (numberOfRounds % 10 == 0) {
-			return threshold;
-		} else if (currentStatus < timeToGetMad) {
-			double innerThreshold = threshold * 0.975; // 97.5% of the threshold
-					
-			if (currentStatus < timeToGetAlmostMad)
-				innerThreshold = threshold * 0.95; // 95% of the threshold
-			
-			return innerThreshold;
-		}
+	private void getBidsPreferredByOpponent() throws Exception {
+		opponentModels[myTurn].computeMostPreferredBid();
 		
-		return threshold;
-	}
+		bidsPreferredByOpponents.set(myTurn, null);	
+		bidsPreferredByOpponents.set(myTurn, opponentModels[myTurn].getAcceptableBids());
+		
+		sortBids(bidsPreferredByOpponents.get(myTurn));
 
-	/* Agent generates an offer to maximize agreement chance at final parts of the negotiation */
-	private Bid getBestBidToAgree(double currentStatus) throws Exception {
-		/* Initialize bids preferred by opponent if it's null */
-		if (bidsPreferredByOpponent == null) {
-			opponentModel.computeMostPreferredBid();
-			initializeBidsPreferredByOpponent();
-		}
-
-		return getBidUsingOpponentModeling(currentStatus);
-	}
-
-	private void initializeBidsPreferredByOpponent() throws Exception {
-		bidsPreferredByOpponent = opponentModel.getAcceptableBids();
-		sortBids(bidsPreferredByOpponent);
-
-		/* There should be at least 2 elements in the array */
-		while (bidsPreferredByOpponent.size() <= 2)
-			bidsPreferredByOpponent.add(bestReceivedBid);
+		/* If there is no element in the list, just add one */
+		if (bidsPreferredByOpponents.get(myTurn).size() == 0)
+			bidsPreferredByOpponents.get(myTurn).add(utilitySpace.getMaxUtilityBid());
 	}
 
 	private void sortBids(List<Bid> bids) {
@@ -241,24 +249,6 @@ public class Group5 extends AbstractNegotiationParty {
 				return 0;
 			}
 		});
-	}
-
-	private Bid getBidUsingOpponentModeling(double currentStatus) throws Exception {
-		Bid bid = (bidsPreferredByOpponent != null) ? bidsPreferredByOpponent.get(shiftBids++ % bidsPreferredByOpponent.size()) : bestReceivedBid;
-
-		if (currentStatus < negotiationLimit * 0.9875) { // Between last 2.5% and 1.25% of the negotiation
-			/* Offer your best received bid if its utility is greater */
-			if (utilitySpace.getUtility(bestReceivedBid) > utilitySpace.getUtility(bid)) {
-				bid = bestReceivedBid;
-				shiftBids = 0;
-			}
-		}
-
-		/* Offer the most preferred bid by the opponent in order to reach an agreement */
-		if (currentStatus > negotiationLimit * 0.999)
-			bid = opponentModel.getMostPreferredBid();
-		
-		return bid;
 	}
 
 	@Override
