@@ -1,3 +1,5 @@
+package negotiator.group5;
+
 import java.util.*;
 import negotiator.*;
 import negotiator.actions.*;
@@ -11,15 +13,13 @@ public class Group5 extends AbstractNegotiationParty {
 	/* ------------------------------------------------ Agent5 ------------------------------------------------
 	 * Agent Description: CS462 - Agent5 - Agent of Group5
 	 * Agent uses several strategies to maximize its utility along with social welfare:
-	 * 	- Agent use some randomness to make it difficult for opponents to model itself.
-	 * 	- Agent will accept offers that is above his threshold value.
-	 * 	- Threshold will be updated by observing the opponent to react better.
-	 * 	- Agent will offer relatively lower utilities for first timeToGetAlmostMad portion of negotiation.
-	 * 	- Agent will offer higher utilities after timeToGetAlmostMad portion to timeToGetMad portion of negotiation.
+	 *  - There will be 3 Opponent Model instances, one for 1st opponent, one for 2nd opponent, one for both
+	 * 	- Agent will accept offers that is above current threshold value.
+	 * 	- Threshold will be updated by observing the opponent to react better (Boulware Level).
+	 * 	- When agent is almost mad, threshold value becomes 0.85
+	 * 	- When agent finally mad, threshold value becomes 0.80
 	 * 	- When agent becomes mad, it will offer bids that have higher utilities than the very first threshold value.
-	 * 	- In order to reach an agreement agent will model its opponents at last 5% and will offer more suitable bids for them.
-	 * 	- At final parts of negotiations if there is still no agreement, agent will offer the best bid that is given by opponent.
-	 * 	- Agent will offer the most preferred bid by opponent as last call to reach an agreement. 
+	 * 	- In the last 1% of the negotiation, agent will offer the best bid that is given by opponent.
 	 * */
 
 	private static final Random RANDOM = new Random();
@@ -48,11 +48,11 @@ public class Group5 extends AbstractNegotiationParty {
 	private double threshold = 0.8;
 	private double currentThreshold = 0.8;
 	/* Variables for Opponent Modeling */
-	private int opponentTurn = 0;
-	private int myTurn = 0;
-	private int shiftBids[] = null;	
-	private OpponentModel[] opponentModels = null;
-	private List<List<Bid>> bidsPreferredByOpponents = null;
+	private int opponentTurn = 0; // Value to keep track opponents
+	private int myTurn = 0; // Random value to choose one of the opponents and use its preferences while generating bid
+	private int shiftBids[] = null; // Index for bidsPreferredByOpponents for each opponent
+	private OpponentModel[] opponentModels = null; // Opponent Model for each opponent.
+	private List<List<Bid>> bidsPreferredByOpponents = null; // bidsPrefferredByOpponents for each opponent
 
 	@Override
 	public void init(NegotiationInfo info) {
@@ -68,6 +68,7 @@ public class Group5 extends AbstractNegotiationParty {
 		opponentModels = new OpponentModel[3];
 		bidsPreferredByOpponents = new ArrayList<List<Bid>>();
 		
+		// Filling the array with empty values to avoid 'Null Pointer Exception'
 		for (int i = 0; i < 3; i++) {
 			opponentModels[i] = new OpponentModel(utilitySpace, threshold);
 			bidsPreferredByOpponents.add(null);
@@ -148,7 +149,7 @@ public class Group5 extends AbstractNegotiationParty {
 			} else if ((int) numberOfRoundsPassed % ROUND_NUMBER_TO_FAKE <= 10 && currentStatus <= negotiationLimit * 0.9) {
 				return getFakeBid();
 			} else {
-				myTurn = RANDOM.nextInt(3);
+				myTurn = RANDOM.nextInt(3); // Generate random value among {0, 1, 2}
 				calculateCurrentThreshold(currentStatus);
 				
 				if (currentStatus > negotiationLimit * 0.99 && utilitySpace.getUtility(bestReceivedBid) >= currentThreshold)
@@ -200,10 +201,11 @@ public class Group5 extends AbstractNegotiationParty {
 		}
 	}
 
-	/* Get a nice bid using Inner Threshold and Opponent Model */
+	/* Get a nice bid using Opponent Model */
 	private Bid getNiceBid(double currentStatus) throws Exception {
 		Bid bid = generateRandomBid();
 		
+		/* Shift Bids is for shifting the index if the bid at the current index is not accepted by opponent */
 		if (currentStatus > timeToGetAlmostMad) {
 			getBidsPreferredByOpponent();		
 			bid = (bidsPreferredByOpponents.get(myTurn) != null) ? 
@@ -222,7 +224,8 @@ public class Group5 extends AbstractNegotiationParty {
 			if (utilitySpace.getUtility(bid) >= currentThreshold)
 				return bid;
 		}
-		
+
+		/* If it cannot generate a random bid higher than current threshold in the maximum number of trials, it returns max utility bid */
 		return utilitySpace.getMaxUtilityBid();
 	}
 	

@@ -3,9 +3,19 @@
     <items>
         <agentRepItems/>
         <partyRepItems>
-            <partyRepItem classPath="/Users/batuhan/Documents/Eclipse Workspace/CS462_AgentProject/bin/Group5.class">
+            <partyRepItem classPath="./bin/negotiator/group5/Group5.class">
                 <properties/>
             </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
+                <properties/>
+            </partyRepItem>
+            <partyRepItem classPath="agents.anac.y2015.RandomDance.RandomDance">
+                <properties/>
+            </partyRepItem>
+            
             <partyRepItem classPath="negotiator.parties.BoulwareNegotiationParty">
                 <properties/>
             </partyRepItem>
@@ -75,16 +85,10 @@
             <partyRepItem classPath="agents.anac.y2015.cuhkagent2015.CUHKAgent2015">
                 <properties/>
             </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
-                <properties/>
-            </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.AresParty.AresParty">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.Mercury.Mercury">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.Atlas3.Atlas3">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.agenth.AgentH">
@@ -130,9 +134,6 @@
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.pnegotiator.PNegotiator">
-                <properties/>
-            </partyRepItem>
-            <partyRepItem classPath="agents.anac.y2015.RandomDance.RandomDance">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.JonnyBlack.JonnyBlack">
