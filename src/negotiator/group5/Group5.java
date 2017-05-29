@@ -207,7 +207,7 @@ public class Group5 extends AbstractNegotiationParty {
 		
 		/* Shift Bids is for shifting the index if the bid at the current index is not accepted by opponent */
 		if (currentStatus > timeToGetAlmostMad) {
-			getBidsPreferredByOpponent();		
+			getBidsPreferredByOpponent();
 			bid = (bidsPreferredByOpponents.get(myTurn) != null) ? 
 					bidsPreferredByOpponents.get(myTurn).get(shiftBids[myTurn]++ % bidsPreferredByOpponents.get(myTurn).size()) : 
 						utilitySpace.getMaxUtilityBid();
