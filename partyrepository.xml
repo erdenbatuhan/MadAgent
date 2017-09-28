@@ -3,7 +3,7 @@
     <items>
         <agentRepItems/>
         <partyRepItems>
-            <partyRepItem classPath="./bin/negotiator/group5/Group5.class">
+            <partyRepItem classPath="./bin/negotiator/MadAgent/MadAgent.class">
                 <properties/>
             </partyRepItem>
             <partyRepItem classPath="agents.anac.y2015.ParsAgent.ParsAgent">
@@ -15,7 +15,6 @@
             <partyRepItem classPath="agents.anac.y2015.RandomDance.RandomDance">
                 <properties/>
             </partyRepItem>
-            
             <partyRepItem classPath="negotiator.parties.BoulwareNegotiationParty">
                 <properties/>
             </partyRepItem>

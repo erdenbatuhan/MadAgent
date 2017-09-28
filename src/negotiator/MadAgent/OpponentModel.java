@@ -1,11 +1,10 @@
-package negotiator.group5;
+package negotiator.MadAgent;
 
 import java.util.*;
 import negotiator.*;
 import negotiator.issue.*;
 import negotiator.utility.UtilitySpace;
 
-/* Opponent Model of Agent5 (CS462 - Agent of Group5) */
 public class OpponentModel {
 
 	private static final int MAXIMUM_BOULWARE_LEVEL = 5;

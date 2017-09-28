@@ -1,0 +1,6 @@
+<negotiation_template> 
+<utility_space number_of_issues="6">
+<objective name="Dinner-Domain" index="0" description="" etype="objective" type="objective"> 
+</objective> 
+</utility_space> 
+</negotiation_template> 

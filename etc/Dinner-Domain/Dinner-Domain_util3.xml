@@ -1,0 +1,78 @@
+<utility_space> 
+<objective name="Dinner-Domain" index="0" description="" etype="objective" type="objective"> 
+<issue vtype="discrete" name="Soup" index="1" etype="discrete" type="discrete"> 
+<item evaluation="3" index="1" value="Tomato Soup"> 
+</item> 
+<item evaluation="1" index="2" value="Chicken Soup"> 
+</item> 
+<item evaluation="3" index="3" value="Mushroom Soup"> 
+</item> 
+<item evaluation="2" index="4" value="Lentil Soup"> 
+</item> 
+</issue> 
+<issue vtype="discrete" name="Starters" index="2" etype="discrete" type="discrete"> 
+<item evaluation="2" index="1" value="Borek"> 
+</item> 
+<item evaluation="1" index="2" value="Chicken Fingers"> 
+</item> 
+<item evaluation="1" index="3" value="Stuffed Vegetables with Olive Oil"> 
+</item> 
+</issue> 
+<issue vtype="discrete" name="Main Dish" index="3" etype="discrete" type="discrete"> 
+<item evaluation="1" index="1" value="Chicken with Curry Sauce"> 
+</item> 
+<item evaluation="2" index="2" value="Meatballs"> 
+</item> 
+<item evaluation="3" index="3" value="Lamb Steak"> 
+</item> 
+<item evaluation="2" index="4" value="Mixed Grill"> 
+</item> 
+<item evaluation="1" index="5" value="Vegetable Dish"> 
+</item> 
+</issue> 
+<issue vtype="discrete" name="Salad" index="4" etype="discrete" type="discrete"> 
+<item evaluation="2" index="1" value="Yogurt"> 
+</item> 
+<item evaluation="1" index="2" value="Seasonal Salad"> 
+</item> 
+<item evaluation="1" index="3" value="Shepherd Salad"> 
+</item> 
+</issue> 
+<issue vtype="discrete" name="Drink" index="5" etype="discrete" type="discrete"> 
+<item evaluation="2" index="1" value="Ayran"> 
+</item> 
+<item evaluation="3" index="2" value="Sparkling Water"> 
+</item> 
+<item evaluation="1" index="3" value="Soft Drink"> 
+</item> 
+<item evaluation="1" index="4" value="Juice"> 
+</item> 
+</issue> 
+<issue vtype="discrete" name="Dessert" index="6" etype="discrete" type="discrete"> 
+<item evaluation="2" index="1" value="Baklava"> 
+</item> 
+<item evaluation="1" index="2" value="Cheesecake"> 
+</item> 
+<item evaluation="1" index="3" value="Apple Pie"> 
+</item> 
+<item evaluation="1" index="4" value="Ice Cream"> 
+</item> 
+</issue> 
+<weight index="1" value="0.20280221590606437"> 
+</weight> 
+<weight index="2" value="0.015031775894723792"> 
+</weight> 
+<weight index="3" value="0.259150687978874"> 
+</weight> 
+<weight index="4" value="0.07715616509359056"> 
+</weight> 
+<weight index="5" value="0.2255368142914449"> 
+</weight> 
+<weight index="6" value="0.22032234083530242"> 
+</weight> 
+</objective> 
+<discount_factor value="1.0"> 
+</discount_factor> 
+<reservation value="0.0"> 
+</reservation> 
+</utility_space> 

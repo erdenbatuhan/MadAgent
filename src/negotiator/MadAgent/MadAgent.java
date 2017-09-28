@@ -1,4 +1,4 @@
-package negotiator.group5;
+package negotiator.MadAgent;
 
 import java.util.*;
 import negotiator.*;
@@ -8,19 +8,7 @@ import negotiator.parties.AbstractNegotiationParty;
 import negotiator.parties.NegotiationInfo;
 import negotiator.persistent.*;
 
-public class Group5 extends AbstractNegotiationParty {
-
-	/* ------------------------------------------------ Agent5 ------------------------------------------------
-	 * Agent Description: CS462 - Agent5 - Agent of Group5
-	 * Agent uses several strategies to maximize its utility along with social welfare:
-	 *  - There will be 3 Opponent Model instances, one for 1st opponent, one for 2nd opponent, one for both
-	 * 	- Agent will accept offers that is above current threshold value.
-	 * 	- Threshold will be updated by observing the opponent to react better (Boulware Level).
-	 * 	- When agent is almost mad, threshold value becomes 0.85
-	 * 	- When agent finally mad, threshold value becomes 0.80
-	 * 	- When agent becomes mad, it will offer bids that have higher utilities than the very first threshold value.
-	 * 	- In the last 1% of the negotiation, agent will offer the best bid that is given by opponent.
-	 * */
+public class MadAgent extends AbstractNegotiationParty {
 
 	private static final Random RANDOM = new Random();
 	private static final int MAXIMUM_NUMBER_OF_TRIALS = 2000;	
@@ -256,7 +244,7 @@ public class Group5 extends AbstractNegotiationParty {
 
 	@Override
 	public String getDescription() {
-		return "CS462 - Agent5 - Agent of Group5";
+		return "ANAC2017-MadAgent";
 	}
 
 	@Override

@@ -25,6 +25,7 @@
                 <profile url="file:etc/templates/partydomain/party_util1.xml"/>
                 <profile url="file:etc/templates/partydomain/party_util2.xml"/>
                 <profile url="file:etc/templates/partydomain/party_util2.xml"/>
+                <profile url="file:etc/templates/partydomain/party_util1.xml"/>
             </domainRepItem>
             <domainRepItem url="file:etc/templates/ANAC2016/AgentHp2/energy_grid_domain.xml">
                 <profile url="file:etc/templates/ANAC2016/AgentHp2/consumer.xml"/>
@@ -698,6 +699,7 @@
                 <profile url="file:etc/templates/Domain1/Domain1_util2.xml"/>
                 <profile url="file:etc/templates/Domain1/Domain1_util3.xml"/>
                 <profile url="file:etc/templates/Domain1/Domain1_util4.xml"/>
+                <profile url="file:etc/templates/Domain1/Domain1_util7.xml"/>
             </domainRepItem>
             <domainRepItem url="file:etc/templates/Domain2/Domain2.xml">
                 <profile url="file:etc/templates/Domain2/Domain2_util1.xml"/>
