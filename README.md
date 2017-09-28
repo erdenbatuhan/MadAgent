@@ -2,6 +2,11 @@
 
 *MadAgent is a negotiation agent that follows “Stacked Alternating Offers Protocol for Multi-Lateral Negotiation (SAOPMN)”.*
 
+## Developers
+
+* **Batuhan Erden** - [@erdenbatuhan](https://github.com/erdenbatuhan)
+* **Ekrem Cetinkaya** - [@ekremcet](https://github.com/ekremcet)
+
 ## About
 
 **Multi-Lateral Negotiation:** A form of interaction in which there are more than two agents, with conflicting interests and a desire to cooperate, try to reach a mutually acceptable agreement.
@@ -34,8 +39,6 @@ The following block provides some initial guidelines based on human experience w
   * Generate a variety of possibilities before deciding what to do.
   * Pay a lot of attention to the flow of negotiation.
   * Examine the previous negotiation sessions to adapt to domain over time.
-  
-## Developers
+ 
+ 
 
-* **Batuhan Erden** - [@erdenbatuhan](https://github.com/erdenbatuhan)
-* **Ekrem Cetinkaya** - [@ekremcet](https://github.com/ekremcet)
